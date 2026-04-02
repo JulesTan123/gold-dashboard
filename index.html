@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Gold Portfolio · Jules</title>
+<style>
+:root {
+  --gold:#C9A84C; --gold-l:#E8D5A0; --gold-d:#8A6F2E;
+  --bg:#0E0F0C; --bg2:#161710; --bg3:#1C1D17;
+  --br:rgba(201,168,76,0.18); --brh:rgba(201,168,76,0.38);
+  --tx:#F0EDE4; --mu:#8A8878; --dim:#484840;
+  --red:#E05A4A; --rdb:rgba(224,90,74,0.09);
+  --grn:#6BBF7A; --grb:rgba(107,191,122,0.09);
+  --amb:#E8A94A; --amb-b:rgba(232,169,74,0.09);
+  --blu:#7CB8F0; --blb:rgba(124,184,240,0.09);
+  --r:10px; --rl:14px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --mono:"SF Mono","Courier New",Courier,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;overscroll-behavior:none;}
+
+/* HEADER */
+.hdr{background:var(--bg2);border-bottom:1px solid var(--br);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:100;}
+.hbrand{display:flex;align-items:center;gap:10px;}
+.gdot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(201,168,76,0.7);animation:glow 2.5s ease-in-out infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(201,168,76,0.5);}50%{box-shadow:0 0 14px rgba(201,168,76,0.9);}}
+.htitle{font-size:16px;font-weight:700;color:var(--gold-l);letter-spacing:0.01em;}
+.hsub{font-size:10px;color:var(--mu);margin-top:1px;}
+.hval{font-family:var(--mono);font-size:11px;color:var(--mu);background:var(--bg3);border:1px solid var(--br);padding:5px 10px;border-radius:7px;}
+
+/* RATE BAR */
+.rbar{background:var(--bg2);border-bottom:1px solid var(--br);padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:57px;z-index:99;}
+.rl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+.rig{display:flex;align-items:center;gap:5px;}
+.rig label{font-size:11px;color:var(--gold);font-family:var(--mono);white-space:nowrap;}
+.rig input{font-family:var(--mono);font-size:12px;color:var(--tx);background:var(--bg3);border:1px solid var(--brh);border-radius:7px;padding:5px 8px;width:80px;outline:none;transition:border-color .2s;}
+.rig input:focus{border-color:var(--gold);}
+.fbtn{font-size:11px;font-weight:600;background:transparent;color:var(--gold);border:1px solid var(--gold-d);border-radius:7px;padding:6px 11px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.fbtn:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
+.ubtn{font-size:11px;font-weight:700;background:var(--gold);color:#0E0F0C;border:none;border-radius:7px;padding:6px 14px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.ubtn:hover{background:var(--gold-l);}
+.ubtn:active{transform:scale(0.97);}
+.live-badge{font-size:10px;color:var(--grn);background:var(--grb);border:1px solid rgba(107,191,122,0.25);padding:3px 7px;border-radius:5px;}
+
+/* TABS */
+.tabbar{background:var(--bg2);border-bottom:1px solid var(--br);display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:107px;z-index:98;}
+.tabbar::-webkit-scrollbar{display:none;}
+.tab{font-size:11px;font-weight:600;padding:12px 16px;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab:hover{color:var(--tx);}
+
+/* PAGE */
+.page{display:none;padding:16px;animation:fadeIn .2s ease;}
+.page.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTION LABEL */
+.sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--br);}
+
+/* METRIC CARDS */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.mc{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);padding:13px 14px;border-top-width:2px;}
+.mc.acc{border-top-color:var(--gold);}
+.mc-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.mc-val{font-size:19px;font-weight:700;line-height:1.1;}
+.mc-sub{font-size:10px;color:var(--mu);margin-top:3px;font-family:var(--mono);}
+
+/* PANEL */
+.panel{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);padding:15px;margin-bottom:14px;}
+
+/* TABLE */
+.twrap{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);overflow:hidden;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;min-width:320px;}
+thead th{font-size:9px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.07em;padding:8px 10px;text-align:left;background:var(--bg3);border-bottom:1px solid var(--br);}
+thead th.r{text-align:right;}
+tbody td{padding:10px 10px;color:var(--tx);border-bottom:1px solid var(--br);vertical-align:middle;font-family:var(--mono);font-size:11px;}
+tbody td.lbl{font-family:var(--font);font-size:12px;}
+tbody td.r{text-align:right;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr{transition:background .15s;}
+tbody tr:hover{background:rgba(201,168,76,0.04);}
+
+/* PILL */
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+.p-ue{background:rgba(124,184,240,0.15);color:var(--blu);}
+.p-uep{background:rgba(107,191,122,0.12);color:var(--grn);}
+.p-ph{background:var(--amb-b);color:var(--amb);}
+.p-ar{background:rgba(201,168,76,0.12);color:var(--gold);}
+
+/* UTILITY */
+.neg{color:var(--red);}
+.pos{color:var(--grn);}
+.warn{color:var(--amb);}
+.mono{font-family:var(--mono);}
+
+/* BREAKEVEN BAR */
+.bei{margin-bottom:13px;}
+.bei:last-child{margin-bottom:0;}
+.bei-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.bei-name{font-size:12px;}
+.bei-pct{font-family:var(--mono);font-size:10px;}
+.bei-track{height:5px;background:var(--bg3);border-radius:3px;}
+.bei-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+
+/* PLROW */
+.plrow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--br);}
+.plrow:last-child{border-bottom:none;}
+.plrow-lbl{font-size:12px;color:var(--mu);}
+.plrow-val{font-family:var(--mono);font-size:12px;}
+
+/* SCENARIO */
+.sc{border-radius:var(--r);padding:13px 14px;border:1px solid;margin-bottom:10px;}
+.sc.bear{background:var(--rdb);border-color:rgba(224,90,74,0.22);}
+.sc.base{background:var(--amb-b);border-color:rgba(232,169,74,0.22);}
+.sc.bull{background:var(--grb);border-color:rgba(107,191,122,0.22);}
+.sc-tag{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:5px;}
+.sc.bear .sc-tag{color:var(--red);}
+.sc.base .sc-tag{color:var(--amb);}
+.sc.bull .sc-tag{color:var(--grn);}
+.sc-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.sc-pl{font-family:var(--mono);font-size:15px;font-weight:700;margin-bottom:5px;}
+.sc.bear .sc-pl{color:var(--red);}
+.sc.base .sc-pl{color:var(--amb);}
+.sc.bull .sc-pl{color:var(--grn);}
+.sc-note{font-size:11px;color:var(--mu);line-height:1.5;}
+
+/* ALERT ZONE */
+.az{background:var(--bg2);border:1px solid var(--brh);border-radius:var(--r);padding:12px 14px;margin-bottom:14px;}
+.az-lbl{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:8px;}
+.az-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;}
+.az-item{font-family:var(--mono);font-size:10px;color:var(--mu);}
+.az-item span{color:var(--tx);}
+
+/* AR HERO */
+.ar-hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.ar-card{background:var(--bg2);border:1px solid var(--brh);border-radius:var(--rl);padding:13px;}
+.ar-lbl{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.ar-val{font-size:17px;font-weight:700;}
+
+/* PAY SCHEDULE */
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--br);flex-wrap:wrap;gap:8px;}
+.pay-row:last-child{border-bottom:none;}
+.pay-date{font-family:var(--mono);color:var(--mu);font-size:12px;}
+.pay-note{font-size:10px;color:var(--mu);margin-top:2px;}
+.pay-amt{font-family:var(--mono);font-size:12px;text-align:right;}
+.pay-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:4px;display:inline-block;}
+
+/* ADVICE */
+.sig-hdr{background:var(--bg2);border:1px solid var(--brh);border-radius:var(--rl);padding:14px;margin-bottom:14px;}
+.sig-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.sig-pill{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.07em;}
+.sig-title{font-size:13px;font-weight:700;}
+.sig-sub{font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:12px;}
+.sig-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.sig-stat{background:var(--bg3);border-radius:var(--r);padding:8px 10px;}
+.sig-stat-l{font-size:9px;color:var(--mu);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.sig-stat-v{font-family:var(--mono);font-size:12px;font-weight:600;}
+
+/* DEPLOY */
+.depl{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);padding:15px;margin-bottom:14px;}
+.d-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--br);flex-wrap:wrap;}
+.d-row:last-child{border-bottom:none;}
+.d-tranche{font-size:11px;font-weight:700;color:var(--gold);}
+.d-amt{font-family:var(--mono);font-size:12px;}
+.d-detail{font-size:11px;color:var(--mu);line-height:1.6;flex:1;min-width:150px;}
+.d-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+
+/* EZ (entry zones) */
+.ez{border-radius:var(--r);padding:13px 14px;border:1px solid;margin-bottom:10px;}
+.ez-tag{font-size:9px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:5px;}
+.ez-range{font-size:14px;font-weight:700;margin-bottom:4px;}
+.ez-note{font-size:11px;color:var(--mu);line-height:1.5;margin-bottom:6px;}
+.ez-act{font-size:11px;font-weight:700;}
+
+/* ADVICE CARDS */
+.acard{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);padding:15px;margin-bottom:12px;}
+.acard.rec{border-color:var(--gold);}
+.acard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.acard-title{font-size:14px;font-weight:700;}
+.acard-best{font-size:9px;font-weight:700;letter-spacing:0.1em;color:var(--gold);background:rgba(201,168,76,0.1);padding:2px 8px;border-radius:20px;border:1px solid var(--brh);}
+.acard-sub{font-size:11px;color:var(--mu);margin-bottom:10px;}
+.acard-calc{background:var(--bg3);border-radius:var(--r);padding:10px 12px;margin-bottom:10px;}
+.acard-calc-l{font-size:10px;color:var(--mu);margin-bottom:3px;}
+.acard-calc-v{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--gold);}
+.pts-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.07em;font-weight:700;margin-bottom:4px;margin-top:9px;}
+.aitem{font-size:11px;color:var(--mu);line-height:1.6;padding-left:11px;position:relative;}
+.aitem::before{content:"·";position:absolute;left:0;color:var(--dim);}
+.verd{margin-top:11px;padding-top:11px;border-top:1px solid var(--br);}
+.verd-lbl{font-size:9px;text-transform:uppercase;letter-spacing:0.07em;color:var(--dim);margin-bottom:3px;font-weight:700;}
+.verd-text{font-size:11px;line-height:1.6;}
+
+/* CASH ROW */
+.cash-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.cash-row label{font-size:12px;color:var(--mu);}
+.cash-row input{font-family:var(--mono);font-size:13px;color:var(--tx);background:var(--bg3);border:1px solid var(--brh);border-radius:7px;padding:7px 10px;width:120px;outline:none;}
+
+/* HISTORY TAB */
+.hist-controls{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.hist-btn{font-size:11px;font-weight:600;background:transparent;color:var(--red);border:1px solid rgba(224,90,74,0.4);border-radius:7px;padding:5px 11px;cursor:pointer;}
+.hist-empty{text-align:center;padding:40px 20px;color:var(--mu);font-size:13px;line-height:1.8;}
+.hist-entry{background:var(--bg2);border:1px solid var(--br);border-radius:var(--rl);padding:14px;margin-bottom:12px;position:relative;}
+.hist-date{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:700;margin-bottom:10px;}
+.hist-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-bottom:10px;}
+.hist-item{font-size:11px;color:var(--mu);}
+.hist-item span{color:var(--tx);font-family:var(--mono);}
+.hist-pl{font-family:var(--mono);font-size:14px;font-weight:700;margin-top:8px;padding-top:8px;border-top:1px solid var(--br);}
+.hist-del{position:absolute;top:12px;right:12px;font-size:10px;color:var(--dim);background:transparent;border:none;cursor:pointer;padding:2px 6px;border-radius:4px;}
+.hist-del:hover{color:var(--red);}
+.hist-note{font-size:10px;color:var(--mu);font-style:italic;margin-top:6px;}
+.hist-note input{font-family:var(--font);font-size:10px;color:var(--mu);background:transparent;border:none;outline:none;width:100%;cursor:text;}
+.hist-note input::placeholder{color:var(--dim);}
+
+/* FOOTER */
+.footer{font-size:10px;color:var(--dim);text-align:center;padding:16px;border-top:1px solid var(--br);font-family:var(--mono);margin-top:4px;}
+
+/* NOTICE BOX */
+.notice{padding:11px 14px;border-radius:var(--r);font-size:11px;line-height:1.7;margin-bottom:14px;border:1px solid;}
+
+@media(max-width:400px){
+  .mgrid,.ar-hero,.az-grid,.sig-stats{grid-template-columns:1fr;}
+  .mc-val{font-size:17px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hbrand">
+    <div class="gdot"></div>
+    <div>
+      <div class="htitle">Gold Portfolio · Jules</div>
+      <div class="hsub">KAB UE · UEP · Physical · Ar-Rahnu</div>
+    </div>
+  </div>
+  <div class="hval" id="hdr-val">—</div>
+</div>
+
+<!-- RATE INPUT BAR -->
+<div class="rbar">
+  <span class="rl">Rates</span>
+  <div class="rig">
+    <label>Spot</label>
+    <input type="number" id="i-spot" value="625.00" step="0.01" placeholder="RM/g">
+  </div>
+  <div id="live-badge" style="display:none;" class="live-badge">● Live</div>
+  <div class="rig">
+    <label>UE Sell</label>
+    <input type="number" id="i-ue" value="673.00" step="0.01">
+  </div>
+  <div class="rig">
+    <label>UEP Sell</label>
+    <input type="number" id="i-uep" value="661.00" step="0.01">
+  </div>
+  <button class="fbtn" id="fetch-btn" onclick="fetchSpot()">↻ Spot</button>
+  <button class="ubtn" onclick="updateAll()">Update</button>
+</div>
+
+<!-- TABS -->
+<div class="tabbar">
+  <div class="tab active" onclick="showTab('port',this)">Overview</div>
+  <div class="tab" onclick="showTab('ar',this)">Ar-Rahnu</div>
+  <div class="tab" onclick="showTab('advice',this)">Gold Advice</div>
+  <div class="tab" onclick="showTab('hist',this)">History</div>
+</div>
+
+<!-- ═══════════ PAGE: OVERVIEW ═══════════ -->
+<div class="page active" id="page-port">
+
+  <div class="sl" style="margin-top:4px;">Portfolio summary</div>
+  <div class="mgrid">
+    <div class="mc"><div class="mc-lbl">Total gold</div><div class="mc-val" id="m-g" style="color:var(--gold)">423.05 g</div><div class="mc-sub">4 categories</div></div>
+    <div class="mc"><div class="mc-lbl">Total invested</div><div class="mc-val">RM 273,080</div><div class="mc-sub">incl. +RM 10K</div></div>
+    <div class="mc"><div class="mc-lbl">Current value</div><div class="mc-val" id="m-cv">—</div><div class="mc-sub">at today's rates</div></div>
+    <div class="mc acc"><div class="mc-lbl">Total P/L</div><div class="mc-val" id="m-pl">—</div><div class="mc-sub" id="m-plp">—</div></div>
+  </div>
+
+  <div class="sl">Breakdown</div>
+  <div class="twrap">
+    <table>
+      <thead><tr>
+        <th>Category</th><th class="r">Grams</th><th class="r">Invested</th>
+        <th class="r">Value</th><th class="r">P/L</th><th class="r">Return</th>
+      </tr></thead>
+      <tbody id="tbl-body"></tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <div class="sl">Breakeven progress</div>
+    <div id="be-bars"></div>
+  </div>
+
+  <div class="panel">
+    <div class="sl">Key price levels</div>
+    <div id="price-levels"></div>
+  </div>
+
+  <div class="sl">Price scenarios</div>
+  <div class="sc bear"><div class="sc-tag">Bear</div><div class="sc-title">Spot → RM 540/g</div><div class="sc-pl" id="sc-bear">—</div><div class="sc-note">Hold all positions. Deploy only on confirmed dip to this level.</div></div>
+  <div class="sc base"><div class="sc-tag">Base</div><div class="sc-title">Spot holds RM 620–660/g</div><div class="sc-pl" id="sc-base">—</div><div class="sc-note">Current recovery. UE and UEP above breakeven. Good time for staged accumulation.</div></div>
+  <div class="sc bull"><div class="sc-tag">Bull</div><div class="sc-title">Spot → RM 720/g+</div><div class="sc-pl" id="sc-bull">—</div><div class="sc-note">Analyst targets $5,000–$6,300. All digital positions in strong profit. Ar-Rahnu within reach of true BE.</div></div>
+
+  <div class="az">
+    <div class="az-lbl">Watch levels</div>
+    <div class="az-grid">
+      <div class="az-item">Spot now: <span id="az-spot">—</span></div>
+      <div class="az-item">UE BE: <span>RM 657.53 sell</span></div>
+      <div class="az-item">UEP BE: <span class="pos">RM 633.08 ✓</span></div>
+      <div class="az-item">Physical BE: <span>RM 671 spot</span></div>
+      <div class="az-item">Ar-Rahnu true BE: <span class="warn">RM 715.04</span></div>
+      <div class="az-item">T3 trigger: <span class="warn">RM 640/g spot</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: AR-RAHNU ═══════════ -->
+<div class="page" id="page-ar">
+
+  <div class="sl" style="margin-top:4px;">Bank Muamalat · Pajak Gadai Islam</div>
+  <div class="ar-hero">
+    <div class="ar-card"><div class="ar-lbl">Principal</div><div class="ar-val" style="color:var(--gold)">RM 61,180</div><div style="font-size:10px;color:var(--mu);margin-top:3px;">100g · 18 months</div></div>
+    <div class="ar-card"><div class="ar-lbl">Profit charge</div><div class="ar-val" style="color:var(--red)">RM 10,324.12</div><div style="font-size:10px;color:var(--mu);margin-top:3px;">Tawarruq</div></div>
+    <div class="ar-card"><div class="ar-lbl">Full redemption</div><div class="ar-val" style="color:var(--amb)">RM 71,504.12</div><div style="font-size:10px;color:var(--mu);margin-top:3px;">principal + profit</div></div>
+    <div class="ar-card"><div class="ar-lbl">True breakeven</div><div class="ar-val" style="color:var(--amb)">RM 715.04/g</div><div style="font-size:10px;color:var(--mu);margin-top:3px;">spot price needed</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="sl">Maturity countdown</div>
+    <div style="font-size:38px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:5px;" id="ar-days">—</div>
+    <div style="font-size:11px;color:var(--mu);margin-bottom:13px;">days remaining to 02 Sep 2027</div>
+    <div style="height:5px;background:var(--bg3);border-radius:3px;margin-bottom:10px;">
+      <div id="ar-prog" style="height:100%;border-radius:3px;background:var(--gold);transition:width .5s;width:0%"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--mu);font-family:var(--mono);">
+      <span>02 Mar 2026</span><span>02 Sep 2027</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="sl">Breakeven analysis</div>
+    <div class="plrow"><span class="plrow-lbl">Gold pledged</span><span class="plrow-val">100g</span></div>
+    <div class="plrow"><span class="plrow-lbl">Full redemption</span><span class="plrow-val">RM 71,504.12</span></div>
+    <div class="plrow"><span class="plrow-lbl">True breakeven (spot)</span><span class="plrow-val warn">RM 715.04/g</span></div>
+    <div class="plrow"><span class="plrow-lbl">Current spot</span><span class="plrow-val" id="ar-spot-now" style="color:var(--gold)">—</span></div>
+    <div class="plrow"><span class="plrow-lbl">Gap to breakeven</span><span class="plrow-val" id="ar-gap">—</span></div>
+  </div>
+
+  <div class="panel">
+    <div class="sl">Payment schedule</div>
+    <div class="pay-row">
+      <div><div class="pay-date">01 Oct 2026</div><div class="pay-note">Profit payment 1 of 3</div></div>
+      <div><div class="pay-amt">RM 4,016.50</div><span class="pay-badge" style="background:var(--amb-b);color:var(--amb);border:1px solid rgba(232,169,74,0.3);">Due in <span id="p1-days">—</span> days</span></div>
+    </div>
+    <div class="pay-row">
+      <div><div class="pay-date">01 Apr 2027</div><div class="pay-note">Profit payment 2 of 3</div></div>
+      <div><div class="pay-amt">RM 3,431.94</div><span class="pay-badge" style="background:var(--bg3);color:var(--mu);border:1px solid var(--br);">Future</span></div>
+    </div>
+    <div class="pay-row">
+      <div><div class="pay-date">02 Sep 2027</div><div class="pay-note">Final profit + full principal</div></div>
+      <div><div class="pay-amt">RM 64,055.68</div><span class="pay-badge" style="background:var(--rdb);color:var(--red);border:1px solid rgba(224,90,74,0.3);">Redemption</span></div>
+    </div>
+  </div>
+
+  <div class="notice" style="background:var(--amb-b);border-color:rgba(232,169,74,0.25);color:var(--amb);">
+    Overlapping strategy: No action needed now. Strategy review flagged for Aug 2026, or earlier if spot approaches RM 715/g.
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: GOLD ADVICE ═══════════ -->
+<div class="page" id="page-advice">
+
+  <!-- Signal header -->
+  <div class="sig-hdr">
+    <div class="sig-row">
+      <span class="sig-pill" id="sig-pill">WATCH</span>
+      <span class="sig-title" id="sig-title">Market signal</span>
+    </div>
+    <div class="sig-sub" id="sig-sub">Loading…</div>
+    <div class="sig-stats">
+      <div class="sig-stat"><div class="sig-stat-l">Spot now</div><div class="sig-stat-v" id="adv-spot" style="color:var(--gold)">—</div></div>
+      <div class="sig-stat"><div class="sig-stat-l">KAB UEP sell</div><div class="sig-stat-v" id="adv-uep">—</div></div>
+      <div class="sig-stat"><div class="sig-stat-l">UEP avg cost</div><div class="sig-stat-v warn">RM 633.08/g</div></div>
+      <div class="sig-stat"><div class="sig-stat-l">Deployed</div><div class="sig-stat-v pos">RM 10,000</div></div>
+    </div>
+  </div>
+
+  <!-- Deployment tracker -->
+  <div class="sl">RM 60,000 deployment tracker</div>
+  <div class="depl">
+    <div class="d-row">
+      <div style="min-width:80px;"><div class="d-tranche">T1</div><div class="d-amt">RM 5,000</div></div>
+      <div class="d-detail">7.9365g @ RM 630/g · 31 Mar 2026 <span class="pos">✓</span></div>
+      <span class="d-badge" style="background:var(--grb);color:var(--grn);border:1px solid rgba(107,191,122,0.3);">Done</span>
+    </div>
+    <div class="d-row">
+      <div style="min-width:80px;"><div class="d-tranche">T2</div><div class="d-amt">RM 5,000</div></div>
+      <div class="d-detail">7.6923g @ RM 650/g · 1 Apr 2026 <span class="pos">✓</span></div>
+      <span class="d-badge" style="background:var(--grb);color:var(--grn);border:1px solid rgba(107,191,122,0.3);">Done</span>
+    </div>
+    <div class="d-row">
+      <div style="min-width:80px;"><div class="d-tranche">T3</div><div class="d-amt">RM 50,000</div></div>
+      <div class="d-detail">KAB UEP — breakout above RM 640/g spot (2 consecutive days) OR dip to RM 575–585/g</div>
+      <span class="d-badge" style="background:var(--amb-b);color:var(--amb);border:1px solid rgba(232,169,74,0.3);">Watching</span>
+    </div>
+  </div>
+
+  <!-- Entry zones -->
+  <div class="sl">Entry zones</div>
+  <div class="ez" style="background:var(--amb-b);border-color:rgba(232,169,74,0.25);">
+    <div class="ez-tag" style="color:var(--amb);">Current — resistance band</div>
+    <div class="ez-range">RM 615–640/g spot</div>
+    <div class="ez-note">Do not deploy Tranche 3 here. Buying in resistance risks a local top entry.</div>
+    <div class="ez-act" style="color:var(--amb);">Action: Hold Tranche 3 capital</div>
+  </div>
+  <div class="ez" style="background:var(--grb);border-color:rgba(107,191,122,0.25);">
+    <div class="ez-tag" style="color:var(--grn);">Breakout — deploy in full</div>
+    <div class="ez-range">RM 640/g+ spot (2 days)</div>
+    <div class="ez-note">Two consecutive closes above RM 640/g = correction is over. Deploy full Tranche 3.</div>
+    <div class="ez-act" style="color:var(--grn);">Action: Deploy full RM 50K into KAB UEP</div>
+  </div>
+  <div class="ez" style="background:var(--blb);border-color:rgba(124,184,240,0.25);">
+    <div class="ez-tag" style="color:var(--blu);">Dip zone — better entry</div>
+    <div class="ez-range">RM 575–590/g spot</div>
+    <div class="ez-note">If spot pulls back here, deploy Tranche 3 immediately. More grams for the same capital.</div>
+    <div class="ez-act" style="color:var(--blu);">Action: Deploy RM 50K on any dip to this level</div>
+  </div>
+
+  <!-- Capital planner -->
+  <div class="sl">Capital planner</div>
+  <div class="cash-row">
+    <label>Capital to plan (RM):</label>
+    <input type="number" id="cash-amt" value="50000" step="1000" min="1000" oninput="updateAdvice()">
+  </div>
+
+  <!-- 3 option cards -->
+  <div class="acard">
+    <div class="acard-top"><div class="acard-title">⏳ Hold cash</div></div>
+    <div class="acard-sub">Wait for better entry — dip or confirmed breakout</div>
+    <div class="acard-calc"><div class="acard-calc-l">Better entry targets</div><div class="acard-calc-v">RM 575–590/g or RM 640/g+</div></div>
+    <div class="pts-lbl" style="color:var(--grn);">For</div>
+    <div class="aitem">Spot in resistance band — local top risk</div>
+    <div class="aitem">T1 and T2 already deployed — no urgency</div>
+    <div class="aitem">Defined triggers give a better entry price</div>
+    <div class="pts-lbl" style="color:var(--red);">Against</div>
+    <div class="aitem">Gold gaps above RM 640 on news — miss the window</div>
+    <div class="verd"><div class="verd-lbl">Verdict</div><div class="verd-text warn">Hold until one trigger fires: dip to RM 575–590 or 2 consecutive closes above RM 640/g spot.</div></div>
+  </div>
+
+  <div class="acard rec">
+    <div class="acard-top"><div class="acard-title">📱 Buy KAB UEP</div><span class="acard-best">BEST NOW</span></div>
+    <div class="acard-sub">Primary vehicle — deploy on trigger</div>
+    <div class="acard-calc">
+      <div class="acard-calc-l">At UEP sell rate (RM <span id="uep-rate-d">661.00</span>/g)</div>
+      <div class="acard-calc-v" id="adv-uep-g">≈ 75.64g for RM 50,000</div>
+    </div>
+    <div class="pts-lbl" style="color:var(--grn);">For</div>
+    <div class="aitem">UEP avg cost RM 633.08/g — all existing units in profit</div>
+    <div class="aitem">Lowest spread (7%) of your digital options</div>
+    <div class="aitem">Fully liquid — no lock-in, sell anytime</div>
+    <div class="aitem">Tranche 3 builds the book at strong levels</div>
+    <div class="pts-lbl" style="color:var(--red);">Against</div>
+    <div class="aitem">Only deploy on defined triggers above — not before</div>
+    <div class="verd"><div class="verd-lbl">Verdict</div><div class="verd-text pos" id="adv-rec-text">Full RM 50,000 into KAB UEP on breakout above RM 640/g or dip to RM 575–590.</div></div>
+  </div>
+
+  <div class="acard">
+    <div class="acard-top"><div class="acard-title">🥇 Buy physical</div></div>
+    <div class="acard-sub">Only if building Ar-Rahnu collateral</div>
+    <div class="acard-calc">
+      <div class="acard-calc-l">At spot + ~8% premium (RM <span id="spot-rate-d">625.00</span>/g)</div>
+      <div class="acard-calc-v" id="adv-ph-g">≈ 74.07g for RM 50,000</div>
+    </div>
+    <div class="pts-lbl" style="color:var(--grn);">For</div>
+    <div class="aitem">MAA wafers accepted for future Ar-Rahnu overlap collateral</div>
+    <div class="pts-lbl" style="color:var(--red);">Against</div>
+    <div class="aitem">71.70g physical already at a loss — adds to weakest position</div>
+    <div class="aitem">Illiquid vs UEP — costly to exit quickly</div>
+    <div class="verd"><div class="verd-lbl">Verdict</div><div class="verd-text neg">Skip for now. Revisit only when specifically building Ar-Rahnu collateral.</div></div>
+  </div>
+
+  <!-- Return projections -->
+  <div class="sl">Return projections · RM <span id="proj-amt">50,000</span> in KAB UEP</div>
+  <div class="twrap">
+    <table>
+      <thead><tr>
+        <th>Spot target</th><th class="r">UEP sell</th><th class="r">Grams</th><th class="r">Gain</th><th class="r">Return</th>
+      </tr></thead>
+      <tbody id="proj-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ PAGE: HISTORY ═══════════ -->
+<div class="page" id="page-hist">
+
+  <div class="sl" style="margin-top:4px;">Daily rate history</div>
+  <div class="notice" style="background:var(--grb);border-color:rgba(107,191,122,0.2);color:var(--grn);">
+    Every time you tap <strong>Update</strong>, today's rates and portfolio values are automatically saved here. Your history is stored locally on this device.
+  </div>
+
+  <div class="hist-controls">
+    <button class="hist-btn" onclick="clearHistory()">Clear all history</button>
+    <span style="font-size:11px;color:var(--mu);" id="hist-count"></span>
+  </div>
+
+  <div id="hist-list"></div>
+</div>
+
+<div class="footer">Personal tracking tool · Not financial advice · Ar-Rahnu: Bank Muamalat 02 Mar 2026 · Maturity 02 Sep 2027</div>
+
+<script>
+// ═══ PORTFOLIO DATA ═══
+const PORT = [
+  {id:"ue",  n:"Digital UE",   cls:"p-ue",  g:165.3783, bv:108800, bp:657.53, sk:"ue"},
+  {id:"uep", n:"Digital UEP",  cls:"p-uep", g:86.877,   bv:55000,  bp:633.08, sk:"uep"},
+  {id:"ph",  n:"Physical",     cls:"p-ph",  g:71.70,    bv:48100,  bp:671.00, sk:"spot"},
+  {id:"ar",  n:"Ar-Rahnu",     cls:"p-ar",  g:100.00,   bv:61180,  bp:715.04, sk:"spot"},
+];
+const TOTAL_BUY = 273080;
+const AR_MAT   = new Date("2027-09-02");
+const AR_START = new Date("2026-03-02");
+const PAY1     = new Date("2026-10-01");
+const TROUGH   = 525;
+const BAR_COL  = {ue:"#7CB8F0",uep:"#6BBF7A",ph:"#E8A94A",ar:"#C9A84C"};
+
+// ═══ HELPERS ═══
+const fmt  = n => Math.round(n).toLocaleString("en-MY");
+const fd   = (n,d=2) => Number(n).toFixed(d);
+const pctS = n => (n>=0?"+":"")+fd(n,2)+"%";
+const sRM  = n => (n>=0?"+RM ":"-RM ")+fmt(Math.abs(n));
+const daysTo = d => Math.max(0, Math.ceil((new Date(d)-new Date())/864e5));
+
+function getR(){
+  return {
+    spot: parseFloat(document.getElementById("i-spot").value)||625,
+    ue:   parseFloat(document.getElementById("i-ue").value)||673,
+    uep:  parseFloat(document.getElementById("i-uep").value)||661,
+  };
+}
+function sell(c,R){ return c.sk==="ue"?R.ue:c.sk==="uep"?R.uep:R.spot; }
+function calcPort(R){
+  return PORT.map(c=>{
+    const s=sell(c,R),cv=c.g*s,pl=cv-c.bv,plp=(pl/c.bv)*100;
+    const gap=c.bp-s,gapP=(gap/c.bp)*100,rec=Math.min(100,(s/c.bp)*100);
+    return{...c,s,cv,pl,plp,gap,gapP,rec};
+  });
+}
+function calcSc(p,R){
+  const ur=p*(R.ue/R.spot),ur2=p*(R.uep/R.spot);
+  return PORT.reduce((a,c)=>a+c.g*(c.sk==="ue"?ur:c.sk==="uep"?ur2:p),0)-TOTAL_BUY;
+}
+
+// ═══ MAIN UPDATE ═══
+function updateAll(){
+  const R = getR();
+  const data = calcPort(R);
+  const totCv = data.reduce((a,c)=>a+c.cv,0);
+  const totG  = data.reduce((a,c)=>a+c.g,0);
+  const totPL = totCv-TOTAL_BUY;
+  const totPct= (totPL/TOTAL_BUY)*100;
+
+  // Header
+  document.getElementById("hdr-val").textContent = "RM "+fmt(totCv);
+
+  // Summary cards
+  document.getElementById("m-g").textContent  = fd(totG,2)+"g";
+  document.getElementById("m-cv").textContent = "RM "+fmt(totCv);
+  const plEl = document.getElementById("m-pl");
+  plEl.textContent = (totPL>=0?"+RM ":"-RM ")+fmt(Math.abs(totPL));
+  plEl.style.color = totPL>=0?"var(--grn)":"var(--red)";
+  const plpEl = document.getElementById("m-plp");
+  plpEl.textContent = pctS(totPct)+" unrealised";
+  plpEl.style.color = totPL>=0?"var(--grn)":"var(--red)";
+
+  // Table
+  const tbody = document.getElementById("tbl-body");
+  tbody.innerHTML = "";
+  data.forEach(c=>{
+    const tr = document.createElement("tr");
+    const note = c.id==="ar"?" *":"";
+    tr.innerHTML = `
+      <td class="lbl"><span class="pill ${c.cls}">${c.n}</span></td>
+      <td class="r">${fd(c.g,2)}</td>
+      <td class="r">RM ${fmt(c.bv)}</td>
+      <td class="r">RM ${fmt(c.cv)}</td>
+      <td class="r" style="color:${c.pl>=0?"var(--grn)":"var(--red)"}">${c.pl>=0?"+":"-"}RM ${fmt(Math.abs(c.pl))}</td>
+      <td class="r" style="color:${c.plp>=0?"var(--grn)":"var(--red)"}">${pctS(c.plp)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // BE bars
+  const bed = document.getElementById("be-bars");
+  bed.innerHTML = "";
+  data.forEach(c=>{
+    const w = Math.max(2,Math.min(100,c.rec));
+    const ok = c.gap<=0;
+    const lbl = ok ? "✓ Breakeven reached" : fd(c.gapP,1)+"% to go"+(c.id==="ar"?" (true)":"");
+    const lc  = ok ? "var(--grn)" : c.gapP>10 ? "var(--red)" : "var(--amb)";
+    bed.innerHTML += `<div class="bei">
+      <div class="bei-top"><span class="bei-name">${c.n}</span><span class="bei-pct" style="color:${lc}">${lbl}</span></div>
+      <div class="bei-track"><div class="bei-fill" style="width:${w}%;background:${BAR_COL[c.id]}"></div></div>
+    </div>`;
+  });
+
+  // Price levels
+  const pld = document.getElementById("price-levels");
+  const rows=[
+    ["Spot now",`RM ${fd(R.spot,2)}/g`,"var(--gold)"],
+    ["KAB UE sell",`RM ${fd(R.ue,2)}/g`,"var(--tx)"],
+    ["KAB UEP sell",`RM ${fd(R.uep,2)}/g`,"var(--tx)"],
+    ["UE breakeven",`RM 657.53/g ${R.ue>=657.53?"✓":""}`,R.ue>=657.53?"var(--grn)":"var(--red)"],
+    ["UEP breakeven",`RM 633.08/g ${R.uep>=633.08?"✓":""}`,R.uep>=633.08?"var(--grn)":"var(--amb)"],
+    ["Physical BE",`RM 671/g ${R.spot>=671?"✓":""}`,R.spot>=671?"var(--grn)":"var(--red)"],
+    ["Ar-Rahnu true BE",`RM 715.04/g ${R.spot>=715.04?"✓":""}`,R.spot>=715.04?"var(--grn)":"var(--amb)"],
+  ];
+  pld.innerHTML = rows.map((r,i)=>`
+    <div class="plrow" style="${i===rows.length-1?"border-bottom:none":""}">
+      <span class="plrow-lbl">${r[0]}</span>
+      <span class="plrow-val" style="color:${r[2]}">${r[1]}</span>
+    </div>`).join("");
+
+  // Scenarios
+  document.getElementById("sc-bear").textContent = sRM(calcSc(540,R));
+  document.getElementById("sc-base").textContent = sRM(calcSc(640,R))+" (est.)";
+  document.getElementById("sc-bull").textContent = sRM(calcSc(720,R));
+  document.getElementById("az-spot").textContent = "RM "+fd(R.spot,2)+"/g";
+
+  // Ar-Rahnu
+  const arDays = daysTo("2027-09-02");
+  const arTot  = Math.ceil((AR_MAT-AR_START)/864e5);
+  const arEl   = Math.ceil((new Date()-AR_START)/864e5);
+  document.getElementById("ar-days").textContent = arDays.toLocaleString();
+  document.getElementById("ar-prog").style.width = Math.min(100,Math.max(0,(arEl/arTot)*100))+"%";
+  document.getElementById("p1-days").textContent = daysTo("2026-10-01");
+  document.getElementById("ar-spot-now").textContent = "RM "+fd(R.spot,2)+"/g";
+  const arGap = 715.04-R.spot;
+  const agEl = document.getElementById("ar-gap");
+  agEl.textContent = arGap>0?`RM ${fd(arGap,2)}/g (+${fd((arGap/715.04)*100,1)}% needed)`:"✓ Breakeven reached";
+  agEl.style.color = arGap>0?"var(--red)":"var(--grn)";
+
+  // Signal
+  updateSignal(R);
+  updateAdvice();
+  saveHistory(R, totCv, totPL, totPct);
+  renderHistory();
+}
+
+function updateSignal(R){
+  let pill,cls,title,sub;
+  if(R.spot<580){pill="BUY DIP";cls="grn";title="Rare dip — deploy Tranche 3 now";sub="Spot below RM 580/g. This is below the March recovery base. Deploy RM 50K into KAB UEP immediately.";}
+  else if(R.spot<615){pill="BUY ZONE";cls="grn";title="Recovery zone — monitor for Tranche 3";sub="Recovery underway. Watch for dip to RM 575–585 (ideal entry) or 2 closes above RM 640/g (breakout entry).";}
+  else if(R.spot<640){pill="WATCH";cls="amb";title="Resistance band — hold Tranche 3";sub="Spot in RM 615–640 resistance zone. Do not deploy Tranche 3 here. Wait for breakout or pullback trigger.";}
+  else if(R.spot<690){pill="DEPLOY";cls="blu";title="Breakout confirmed — deploy Tranche 3 now";sub="Spot above RM 640/g. The correction is over. Deploy remaining RM 50K into KAB UEP now. Do not wait.";}
+  else{pill="HOLD";cls="red";title="Elevated — hold remaining capital";sub="Spot above RM 690/g. All tranches should be deployed. Monitor positions for partial profit-taking on UE.";}
+  const pillEl=document.getElementById("sig-pill");
+  const colors={grn:["var(--grn)","var(--grb)","rgba(107,191,122,0.3)"],amb:["var(--amb)","var(--amb-b)","rgba(232,169,74,0.3)"],blu:["var(--blu)","var(--blb)","rgba(124,184,240,0.3)"],red:["var(--red)","var(--rdb)","rgba(224,90,74,0.3)"]};
+  const[c,bg,bc]=colors[cls];
+  pillEl.textContent=pill;pillEl.style.cssText=`color:${c};background:${bg};border:1px solid ${bc};`;
+  document.getElementById("sig-title").textContent=title;
+  document.getElementById("sig-sub").textContent=sub;
+  document.getElementById("adv-spot").textContent="RM "+fd(R.spot,2)+"/g";
+  document.getElementById("adv-uep").textContent="RM "+fd(R.uep,2)+"/g";
+}
+
+function updateAdvice(){
+  const R=getR();
+  const cash=parseFloat(document.getElementById("cash-amt").value)||50000;
+  const uepG=cash/R.uep, phG=cash/(R.spot*1.08);
+  const ratio=R.uep/R.spot;
+  document.getElementById("uep-rate-d").textContent=fd(R.uep,2);
+  document.getElementById("spot-rate-d").textContent=fd(R.spot,2);
+  document.getElementById("adv-uep-g").textContent=`≈ ${fd(uepG,2)}g for RM ${fmt(cash)}`;
+  document.getElementById("adv-ph-g").textContent=`≈ ${fd(phG,2)}g for RM ${fmt(cash)}`;
+  document.getElementById("proj-amt").textContent=fmt(cash);
+  document.getElementById("adv-rec-text").textContent=`Full RM ${fmt(cash)} into KAB UEP on breakout above RM 640/g or dip to RM 575–590.`;
+  const pb=document.getElementById("proj-body");
+  pb.innerHTML="";
+  [[640,"Near-term"],[680,"Base mid-2026"],[715,"Ar-Rahnu BE"],[760,"Bull"],[820,"Bull H2"]].forEach(([sp,n],i,a)=>{
+    const us=sp*ratio,val=uepG*us,gain=val-cash,ret=(gain/cash)*100;
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td class="lbl">RM ${sp} <span style="font-size:10px;color:var(--mu)">${n}</span></td>
+      <td class="r">RM ${fd(us,2)}</td>
+      <td class="r">${fd(uepG,2)}g</td>
+      <td class="r" style="color:${gain>=0?"var(--grn)":"var(--red)"}">${gain>=0?"+":"-"}RM ${fmt(Math.abs(gain))}</td>
+      <td class="r" style="color:${ret>=0?"var(--grn)":"var(--red)"}">${pctS(ret)}</td>`;
+    pb.appendChild(tr);
+  });
+}
+
+// ═══ HISTORY ═══
+const HIST_KEY = "jules_gold_history";
+
+function loadHistory(){
+  try{ return JSON.parse(localStorage.getItem(HIST_KEY))||[]; }
+  catch(e){ return []; }
+}
+function saveHistory(R,totCv,totPL,totPct){
+  const hist = loadHistory();
+  const today = new Date().toISOString().split("T")[0];
+  const idx = hist.findIndex(h=>h.date===today);
+  const entry = {
+    date: today,
+    spot: fd(R.spot,2),
+    ue: fd(R.ue,2),
+    uep: fd(R.uep,2),
+    value: Math.round(totCv),
+    pl: Math.round(totPL),
+    plp: fd(totPct,2),
+    note: idx>=0 ? (hist[idx].note||"") : "",
+    ts: new Date().toLocaleTimeString("en-MY",{hour:"2-digit",minute:"2-digit"}),
+  };
+  if(idx>=0) hist[idx]=entry; else hist.unshift(entry);
+  hist.sort((a,b)=>b.date.localeCompare(a.date));
+  try{ localStorage.setItem(HIST_KEY,JSON.stringify(hist.slice(0,365))); }catch(e){}
+}
+function renderHistory(){
+  const hist = loadHistory();
+  const el = document.getElementById("hist-list");
+  document.getElementById("hist-count").textContent = hist.length+" entries saved";
+  if(!hist.length){
+    el.innerHTML=`<div class="hist-empty">No history yet.<br>Tap <strong>Update</strong> to save today's snapshot.</div>`;
+    return;
+  }
+  el.innerHTML = hist.map((h,i)=>`
+    <div class="hist-entry" id="he-${i}">
+      <button class="hist-del" onclick="deleteEntry(${i})" title="Delete">✕</button>
+      <div class="hist-date">📅 ${h.date} · ${h.ts||""}</div>
+      <div class="hist-grid">
+        <div class="hist-item">Spot: <span>RM ${h.spot}/g</span></div>
+        <div class="hist-item">KAB UE sell: <span>RM ${h.ue}/g</span></div>
+        <div class="hist-item">KAB UEP sell: <span>RM ${h.uep}/g</span></div>
+        <div class="hist-item">Portfolio value: <span>RM ${(h.value||0).toLocaleString()}</span></div>
+      </div>
+      <div class="hist-pl" style="color:${(h.pl||0)>=0?"var(--grn)":"var(--red)"}">
+        P/L: ${(h.pl||0)>=0?"+":"-"}RM ${Math.abs(h.pl||0).toLocaleString()} (${h.plp}%)
+      </div>
+      <div class="hist-note">
+        <input type="text" placeholder="Add a note for this day…" value="${h.note||""}"
+          onchange="updateNote(${i},this.value)" id="note-${i}">
+      </div>
+    </div>`).join("");
+}
+function deleteEntry(i){
+  const hist=loadHistory();
+  hist.splice(i,1);
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(hist));}catch(e){}
+  renderHistory();
+}
+function updateNote(i,val){
+  const hist=loadHistory();
+  if(hist[i]) hist[i].note=val;
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(hist));}catch(e){}
+}
+function clearHistory(){
+  if(!confirm("Clear all history? This cannot be undone.")) return;
+  try{localStorage.removeItem(HIST_KEY);}catch(e){}
+  renderHistory();
+}
+
+// ═══ SPOT FETCH ═══
+async function fetchSpot(){
+  const btn=document.getElementById("fetch-btn");
+  btn.textContent="…"; btn.disabled=true;
+  try{
+    const r=await fetch("https://data-asg.goldprice.org/dbXRates/MYR");
+    const d=await r.json();
+    if(d&&d.items&&d.items[0]){
+      const g=(d.items[0].xauPrice/31.1035).toFixed(2);
+      document.getElementById("i-spot").value=g;
+      document.getElementById("live-badge").style.display="inline";
+      updateAll();
+    } else throw 0;
+  }catch(e){
+    document.getElementById("live-badge").style.display="none";
+    alert("Auto-fetch unavailable. Enter spot manually from goldprice.org");
+  }
+  btn.textContent="↻ Spot"; btn.disabled=false;
+}
+
+// ═══ TABS ═══
+function showTab(name,el){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("page-"+name).classList.add("active");
+  if(name==="hist") renderHistory();
+}
+
+// ═══ INIT ═══
+updateAll();
+fetchSpot();
+</script>
+</body>
+</html>
