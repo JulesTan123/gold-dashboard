@@ -764,19 +764,92 @@ function clearHistory(){
 async function fetchSpot(){
   const btn=document.getElementById("fetch-btn");
   btn.textContent="…"; btn.disabled=true;
-  try{
-    const r=await fetch("https://data-asg.goldprice.org/dbXRates/MYR");
-    const d=await r.json();
-    if(d&&d.items&&d.items[0]){
-      const g=(d.items[0].xauPrice/31.1035).toFixed(2);
-      document.getElementById("i-spot").value=g;
-      document.getElementById("live-badge").style.display="inline";
-      updateAll();
-    } else throw 0;
-  }catch(e){
-    document.getElementById("live-badge").style.display="none";
-    alert("Auto-fetch unavailable. Enter spot manually from goldprice.org");
+  const badge=document.getElementById("live-badge");
+
+  // Try multiple APIs in sequence — first one that works wins
+  const apis=[
+    // API 1: Open exchange rates for USD/MYR + metals-api for XAU/USD
+    async()=>{
+      const r=await fetch("https://open.er-api.com/v6/latest/USD",{mode:"cors"});
+      const d=await r.json();
+      if(!d.rates||!d.rates.MYR) throw 0;
+      const myrPerUsd=d.rates.MYR;
+      // XAU/USD from frankfurter (no XAU) — skip, use MYR rate with known spot
+      // Use metals-api alternative
+      throw 0; // skip to next
+    },
+    // API 2: Metals-live (no key needed, CORS open)
+    async()=>{
+      const r=await fetch("https://api.metals.live/v1/spot/gold",{mode:"cors"});
+      const d=await r.json();
+      if(!d||!d[0]||!d[0].gold) throw 0;
+      const xauUsd=d[0].gold;
+      // Get MYR rate
+      const r2=await fetch("https://open.er-api.com/v6/latest/USD",{mode:"cors"});
+      const d2=await r2.json();
+      if(!d2.rates||!d2.rates.MYR) throw 0;
+      return (xauUsd/31.1035)*d2.rates.MYR;
+    },
+    // API 3: Frankfurter for FX + calculate from known XAU price
+    async()=>{
+      // Get USD/MYR
+      const r=await fetch("https://api.frankfurter.app/latest?from=USD&to=MYR",{mode:"cors"});
+      const d=await r.json();
+      if(!d.rates||!d.rates.MYR) throw 0;
+      const myrPerUsd=d.rates.MYR;
+      // Get gold in USD from another open API
+      const r2=await fetch("https://api.gold-api.com/price/XAU",{mode:"cors"});
+      const d2=await r2.json();
+      if(!d2.price) throw 0;
+      return (d2.price/31.1035)*myrPerUsd;
+    },
+    // API 4: goldprice.org original (may work on GitHub Pages)
+    async()=>{
+      const r=await fetch("https://data-asg.goldprice.org/dbXRates/MYR",{mode:"cors"});
+      const d=await r.json();
+      if(!d||!d.items||!d.items[0]) throw 0;
+      return d.items[0].xauPrice/31.1035;
+    },
+    // API 5: forex-data-feed for MYR gold
+    async()=>{
+      const r=await fetch("https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?interval=1d&range=1d",{mode:"cors"});
+      const d=await r.json();
+      const price=d?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if(!price) throw 0;
+      const r2=await fetch("https://open.er-api.com/v6/latest/USD",{mode:"cors"});
+      const d2=await r2.json();
+      if(!d2.rates?.MYR) throw 0;
+      return (price/31.1035)*d2.rates.MYR;
+    },
+  ];
+
+  let success=false;
+  for(let i=1;i<apis.length;i++){
+    try{
+      const gramPriceMYR=await apis[i]();
+      if(gramPriceMYR>400&&gramPriceMYR<1500){ // sanity check
+        document.getElementById("i-spot").value=gramPriceMYR.toFixed(2);
+        badge.style.display="inline";
+        success=true;
+        updateAll();
+        break;
+      }
+    }catch(e){ continue; }
   }
+
+  if(!success){
+    badge.style.display="none";
+    // Show manual input prompt instead of alert
+    const spotInput=document.getElementById("i-spot");
+    spotInput.style.borderColor="var(--amb)";
+    spotInput.placeholder="Enter manually";
+    spotInput.title="Auto-fetch failed. Get spot from goldprice.org/gold-price-malaysia.html";
+    setTimeout(()=>{spotInput.style.borderColor="";},3000);
+    btn.textContent="↻ Retry";
+    btn.disabled=false;
+    return;
+  }
+
   btn.textContent="↻ Spot"; btn.disabled=false;
 }
 
