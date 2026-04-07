@@ -994,11 +994,10 @@ Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON
   "timestamp": "Generated at X:XX am/pm KL time"
 }`;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://gold-brief-proxy.juliana-tan.workers.dev', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
