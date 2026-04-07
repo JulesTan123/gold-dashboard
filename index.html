@@ -835,12 +835,12 @@
   <div class="summary-grid">
     <div class="summary-card highlight">
       <div class="card-label">Total Gold Held</div>
-      <div class="card-value gold-value">423.96<span style="font-size:16px;"> g</span></div>
+      <div class="card-value gold-value">431.73<span style="font-size:16px;"> g</span></div>
       <div class="card-sub">4 categories</div>
     </div>
     <div class="summary-card">
       <div class="card-label">Total Invested</div>
-      <div class="card-value white-value" style="font-size:20px;">RM 273,080</div>
+      <div class="card-value white-value" style="font-size:20px;">RM 278,080</div>
       <div class="card-sub">incl. +RM 10K new</div>
     </div>
     <div class="summary-card">
@@ -873,7 +873,7 @@
     </div>
     <div class="breakdown-row">
       <span><div class="category-badge badge-uep">Digital UEP</div></span>
-      <span>86.88</span>
+      <span>94.65</span>
       <span style="font-size:12px;">RM 55,000</span>
       <span id="uepValue">—</span>
       <span id="uepReturn" style="font-size:12px;">—</span>
@@ -910,7 +910,7 @@
         <span class="be-status" id="uepBeStatus">—</span>
       </div>
       <div class="be-bar-bg"><div class="be-bar-fill fill-green" id="uepBeBar" style="width:0%"></div></div>
-      <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 631.44/g</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 633.89/g</div>
     </div>
     <div class="be-row">
       <div class="be-top">
@@ -962,7 +962,7 @@
         <span class="scenario-price" style="color:var(--blue);"></span>
       </div>
       <div class="scenario-desc" id="watchLevels">
-        Spot now: — &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 631.44/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g
+        Spot now: — &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 633.89/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g
       </div>
     </div>
   </div>
@@ -1100,7 +1100,7 @@
     </div>
     <div class="level-item" id="uepBeLevel">
       <div class="level-label">UEP Breakeven</div>
-      <div class="level-value">RM 631.44</div>
+      <div class="level-value">RM 633.89</div>
       <div class="level-status" id="uepBeLevel2">—</div>
     </div>
     <div class="level-item" id="arBeLevel">
@@ -1183,7 +1183,7 @@
   <div class="divider"></div>
 
   <!-- RETURN PROJECTIONS -->
-  <p class="section-label">Return Projections (423.96g)</p>
+  <p class="section-label">Return Projections (431.73g)</p>
   <div class="projection-table">
     <div class="proj-row header-row">
       <span>Target</span>
@@ -1356,7 +1356,7 @@ function updateDashboard() {
 
   // Watch levels
   document.getElementById('watchLevels').innerHTML =
-    `Spot now: <strong>${spot ? 'RM '+spot+'/g' : '—'}</strong> &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 631.44/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g`;
+    `Spot now: <strong>${spot ? 'RM '+spot+'/g' : '—'}</strong> &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 633.89/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g`;
 
   // Projections (USD targets → RM at 4.05 MYR)
   const project = (usdPerOz, id, plId) => {
@@ -1411,7 +1411,7 @@ function updateAdviceLevels(spot) {
   };
 
   checkBe(parseFloat(document.getElementById('ueSellInput').value)||s,  657.53, 'ueBeLevel2',  'ueBeLevel');
-  checkBe(parseFloat(document.getElementById('uepSellInput').value)||s, 631.44, 'uepBeLevel2', 'uepBeLevel');
+  checkBe(parseFloat(document.getElementById('uepSellInput').value)||s, 633.89, 'uepBeLevel2', 'uepBeLevel');
   checkBe(s, 715.04, 'arBeLevel2', 'arBeLevel');
 }
 
@@ -1448,9 +1448,9 @@ async function generateBrief() {
     const uepSell = parseFloat(document.getElementById('uepSellInput').value) || 0;
 
     const prompt = `You are Jules' personal gold investment advisor. Jules holds a Malaysian gold portfolio:
-- Total: 423.96g across KAB Digital UE (165.38g), UEP (86.88g), Physical (71.70g), Ar-Rahnu pledge (100g)
-- Total invested: RM 273,080
-- KAB UE breakeven: RM 657.53/g | UEP breakeven: RM 631.44/g | Physical BE: RM 671/g | Ar-Rahnu true BE: RM 715.04/g
+- Total: 431.73g across KAB Digital UE (165.38g), UEP (94.65g), Physical (71.70g), Ar-Rahnu pledge (100g)
+- Total invested: RM 278,080
+- KAB UE breakeven: RM 657.53/g | UEP breakeven: RM 633.89/g | Physical BE: RM 671/g | Ar-Rahnu true BE: RM 715.04/g
 - Current KAB UEP buy price: RM ${uepSell || 'unknown'}/g | Spot: RM ${spot || 'unknown'}/g
 - Strategy: accumulating to 500g+ for 6-figure profit target at $6,000+ gold
 - KAB locks price at purchase time (6am). So if gold is UP overnight → BUY before 9am. If DOWN → wait for lower 9am price.
