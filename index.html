@@ -55,173 +55,84 @@
     margin-bottom: 14px;
   }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .brand { display: flex; align-items: center; gap: 10px; }
 
   .brand-icon {
-    width: 36px;
-    height: 36px;
+    width: 36px; height: 36px;
     background: var(--gold);
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 18px;
-    color: #000;
+    font-weight: 700; font-size: 18px; color: #000;
   }
 
-  .brand-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1;
-  }
-
-  .brand-text p {
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 2px;
-    font-weight: 400;
-  }
+  .brand-text h1 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--text); line-height: 1; }
+  .brand-text p { font-size: 11px; color: var(--text-dim); margin-top: 2px; font-weight: 400; }
 
   .total-value-badge {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 8px 14px;
-    text-align: right;
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; text-align: right;
   }
-
   .total-value-badge .label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px; }
   .total-value-badge .value { font-size: 17px; font-weight: 600; color: var(--gold); font-family: 'DM Mono', monospace; }
 
-  /* RATES BAR */
-  .rates-bar {
+  /* RATES INPUTS — REDESIGNED LAYOUT */
+  .rates-row1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .rate-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .rate-input-group label {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-
-  .rate-input-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .rate-input {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 7px 10px;
-    width: 100%;
-    outline: none;
-  }
-
-  .rate-input:focus { border-color: var(--gold); }
-
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    margin-bottom: 8px;
   }
 
   .rates-row2 {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr auto;
     gap: 8px;
     align-items: flex-end;
+    margin-bottom: 0;
   }
+
+  .rate-input-group { display: flex; flex-direction: column; gap: 3px; }
+
+  .rate-input-group label {
+    font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px; font-weight: 500; text-transform: uppercase;
+  }
+
+  .rate-input-row { display: flex; align-items: center; gap: 6px; }
+
+  .rate-input {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 7px;
+    color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500;
+    padding: 7px 10px; width: 100%; outline: none;
+  }
+  .rate-input:focus { border-color: var(--gold); }
+
+  .live-dot {
+    width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+    animation: pulse 2s infinite; flex-shrink: 0;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
   .btn {
-    padding: 9px 16px;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    white-space: nowrap;
+    padding: 9px 16px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; white-space: nowrap;
   }
-
-  .btn-gold {
-    background: var(--gold);
-    color: #000;
-  }
-
+  .btn-gold { background: var(--gold); color: #000; }
   .btn-gold:active { background: var(--gold-light); transform: scale(0.97); }
-
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    font-size: 13px;
-    padding: 9px 12px;
-  }
-
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-dim); font-size: 13px; padding: 9px 12px; }
   .btn-outline:active { border-color: var(--gold); color: var(--gold); }
 
   /* TABS */
   .tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: flex; border-bottom: 1px solid var(--border); background: var(--bg);
+    overflow-x: auto; scrollbar-width: none;
   }
-
   .tabs::-webkit-scrollbar { display: none; }
-
   .tab {
-    padding: 13px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-dim);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all 0.2s;
-    flex-shrink: 0;
+    padding: 13px 20px; font-size: 14px; font-weight: 500; color: var(--text-dim);
+    cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap;
+    transition: all 0.2s; flex-shrink: 0;
   }
-
-  .tab.active {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-    font-weight: 600;
-  }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 600; }
 
   /* TAB CONTENT */
   .tab-content { display: none; padding: 20px; }
@@ -229,474 +140,143 @@
 
   /* SECTION LABEL */
   .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 24px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px; color: var(--text-muted);
+    text-transform: uppercase; margin-bottom: 12px; margin-top: 24px;
   }
-
   .section-label:first-child { margin-top: 0; }
 
   /* SUMMARY CARDS */
-  .summary-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 4px;
-  }
-
-  .summary-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px;
-  }
-
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+  .summary-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
   .summary-card.highlight { border-color: var(--gold-dim); }
   .summary-card.profit-neg { border-color: var(--red-dim); }
   .summary-card.profit-pos { border-color: var(--green-dim); }
-
-  .summary-card .card-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .summary-card .card-value {
-    font-size: 24px;
-    font-weight: 700;
-    font-family: 'DM Mono', monospace;
-    line-height: 1.1;
-  }
-
-  .summary-card .card-sub {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 4px;
-  }
-
+  .summary-card .card-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.5px; font-weight: 500; text-transform: uppercase; margin-bottom: 6px; }
+  .summary-card .card-value { font-size: 24px; font-weight: 700; font-family: 'DM Mono', monospace; line-height: 1.1; }
+  .summary-card .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
   .gold-value { color: var(--gold); }
   .green-value { color: var(--green); }
   .red-value { color: var(--red); }
   .white-value { color: var(--text); }
 
   /* BREAKDOWN TABLE */
-  .breakdown-table {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-
-  .breakdown-header {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1.8fr 1.5fr 1.2fr;
-    padding: 11px 16px;
-    background: var(--bg4);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .breakdown-header span {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-
-  .breakdown-row {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1.8fr 1.5fr 1.2fr;
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    align-items: center;
-  }
-
+  .breakdown-table { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .breakdown-header { display: grid; grid-template-columns: 2fr 1.5fr 1.8fr 1.5fr 1.2fr; padding: 11px 16px; background: var(--bg4); border-bottom: 1px solid var(--border); }
+  .breakdown-header span { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; color: var(--text-muted); text-transform: uppercase; }
+  .breakdown-row { display: grid; grid-template-columns: 2fr 1.5fr 1.8fr 1.5fr 1.2fr; padding: 14px 16px; border-bottom: 1px solid var(--border); align-items: center; }
   .breakdown-row:last-child { border-bottom: none; }
-
-  .breakdown-row span {
-    font-size: 13px;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .category-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .badge-ue { background: rgba(100, 181, 246, 0.15); color: var(--blue); border: 1px solid rgba(100,181,246,0.3); }
-  .badge-uep { background: rgba(76, 175, 80, 0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
-  .badge-phys { background: rgba(201, 168, 76, 0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-  .badge-ar { background: rgba(255, 167, 38, 0.15); color: var(--amber); border: 1px solid rgba(255,167,38,0.3); }
+  .breakdown-row span { font-size: 13px; font-family: 'DM Mono', monospace; }
+  .category-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif; }
+  .badge-ue { background: rgba(100,181,246,0.15); color: var(--blue); border: 1px solid rgba(100,181,246,0.3); }
+  .badge-uep { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
+  .badge-phys { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .badge-ar { background: rgba(255,167,38,0.15); color: var(--amber); border: 1px solid rgba(255,167,38,0.3); }
 
   /* BREAKEVEN BARS */
   .be-section { margin-top: 4px; }
-
-  .be-row {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 8px;
-  }
-
-  .be-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
+  .be-row { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; }
+  .be-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .be-name { font-size: 14px; font-weight: 500; }
   .be-status { font-size: 12px; font-weight: 600; }
   .be-reached { color: var(--green); }
   .be-pending { color: var(--amber); }
   .be-far { color: var(--red); }
-
-  .be-bar-bg {
-    height: 8px;
-    background: var(--bg4);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .be-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.8s ease;
-  }
-
+  .be-bar-bg { height: 8px; background: var(--bg4); border-radius: 4px; overflow: hidden; }
+  .be-bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
   .fill-blue { background: linear-gradient(90deg, #1565C0, #64B5F6); }
   .fill-green { background: linear-gradient(90deg, #2E7D32, #4CAF50); }
   .fill-gold { background: linear-gradient(90deg, #8B6914, #C9A84C); }
   .fill-amber { background: linear-gradient(90deg, #E65100, #FFA726); }
 
   /* PRICE SCENARIOS */
-  .scenario-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .scenario-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-  }
-
+  .scenario-grid { display: flex; flex-direction: column; gap: 10px; }
+  .scenario-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
   .scenario-card.bear { border-left: 3px solid var(--red); }
   .scenario-card.base { border-left: 3px solid var(--gold); }
   .scenario-card.bull { border-left: 3px solid var(--green); }
   .scenario-card.watch { border-left: 3px solid var(--blue); }
-
-  .scenario-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-
-  .scenario-title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .scenario-price {
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    font-weight: 600;
-  }
-
+  .scenario-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .scenario-title { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+  .scenario-price { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 600; }
   .scenario-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
   .scenario-value { font-size: 16px; font-weight: 700; font-family: 'DM Mono', monospace; margin-top: 8px; }
 
-  /* =================== GOLD ADVICE TAB =================== */
-
-  /* VERDICT BANNER */
-  .verdict-banner {
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    border: 1px solid transparent;
-  }
-
+  /* GOLD ADVICE TAB */
+  .verdict-banner { border-radius: 16px; padding: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 16px; border: 1px solid transparent; }
   .verdict-banner.buy { background: rgba(76,175,80,0.12); border-color: rgba(76,175,80,0.4); }
   .verdict-banner.wait { background: rgba(239,83,80,0.12); border-color: rgba(239,83,80,0.4); }
   .verdict-banner.hold { background: rgba(255,167,38,0.12); border-color: rgba(255,167,38,0.4); }
   .verdict-banner.loading { background: var(--bg3); border-color: var(--border); }
-
-  .verdict-icon {
-    font-size: 42px;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-
+  .verdict-icon { font-size: 42px; flex-shrink: 0; line-height: 1; }
   .verdict-text { flex: 1; }
-
-  .verdict-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 2px;
-  }
-
-  .verdict-main {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.1;
-  }
-
+  .verdict-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 2px; }
+  .verdict-main { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; line-height: 1.1; }
   .verdict-banner.buy .verdict-main { color: var(--green); }
   .verdict-banner.wait .verdict-main { color: var(--red); }
   .verdict-banner.hold .verdict-main { color: var(--amber); }
+  .verdict-sub { font-size: 13px; color: var(--text-dim); margin-top: 4px; line-height: 1.4; }
 
-  .verdict-sub {
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-top: 4px;
-    line-height: 1.4;
-  }
+  .advice-section { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 12px; }
+  .advice-section-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .advice-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* ADVICE SECTIONS */
-  .advice-section {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 12px;
-  }
-
-  .advice-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .advice-section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* MARKETS GRID */
-  .markets-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .market-item {
-    background: var(--bg4);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-
-  .market-item .m-label {
-    font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .market-item .m-value {
-    font-family: 'DM Mono', monospace;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .market-item .m-change {
-    font-size: 12px;
-    margin-top: 2px;
-    font-weight: 500;
-  }
-
+  .markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .market-item { background: var(--bg4); border-radius: 10px; padding: 12px 14px; }
+  .market-item .m-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .market-item .m-value { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 600; color: var(--text); }
+  .market-item .m-change { font-size: 12px; margin-top: 2px; font-weight: 500; }
   .m-up { color: var(--green); }
   .m-down { color: var(--red); }
   .m-flat { color: var(--text-dim); }
 
-  /* WHY BULLETS */
   .why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-  .why-list li {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--text-dim);
-  }
-
-  .why-list li .bullet {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
+  .why-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--text-dim); }
+  .why-list li .bullet { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
   .bullet-green { background: rgba(76,175,80,0.2); color: var(--green); }
   .bullet-red { background: rgba(239,83,80,0.2); color: var(--red); }
   .bullet-amber { background: rgba(255,167,38,0.2); color: var(--amber); }
 
-  /* ACTION PLAN */
   .action-list { display: flex; flex-direction: column; gap: 8px; }
-
-  .action-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 14px;
-    background: var(--bg4);
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
+  .action-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: var(--bg4); border-radius: 10px; font-size: 14px; line-height: 1.5; }
   .action-icon { font-size: 18px; flex-shrink: 0; }
 
-  /* TRIGGER BUTTON */
   .brief-trigger {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, #8B6914, #C9A84C);
-    border: none;
-    border-radius: 14px;
-    color: #000;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
+    width: 100%; padding: 16px; background: linear-gradient(135deg, #8B6914, #C9A84C);
+    border: none; border-radius: 14px; color: #000; font-family: 'DM Sans', sans-serif;
+    font-size: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; gap: 10px; margin-bottom: 16px; transition: all 0.2s; letter-spacing: 0.3px;
   }
-
   .brief-trigger:active { transform: scale(0.98); opacity: 0.9; }
+  .brief-trigger.loading { background: var(--bg3); color: var(--text-dim); border: 1px solid var(--border); }
 
-  .brief-trigger.loading {
-    background: var(--bg3);
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-  }
+  .brief-timestamp { text-align: center; font-size: 11px; color: var(--text-muted); margin-bottom: 16px; }
 
-  /* TIMESTAMP */
-  .brief-timestamp {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-  }
-
-  /* LOADING SPINNER */
-  .spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(201,168,76,0.3);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
+  .spinner { width: 20px; height: 20px; border: 2px solid rgba(201,168,76,0.3); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* AR-RAHNU TAB */
-  .ar-card {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 12px;
-  }
-
-  .ar-card-title {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .ar-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
+  /* ARBM TAB */
+  .ar-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 12px; }
+  .ar-card-title { font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; }
+  .ar-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .ar-row:last-child { border-bottom: none; }
   .ar-row .ar-label { font-size: 14px; color: var(--text-dim); }
   .ar-row .ar-value { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; }
 
   .countdown-badge {
-    background: rgba(255,167,38,0.1);
-    border: 1px solid rgba(255,167,38,0.3);
-    border-radius: 10px;
-    padding: 14px 16px;
-    text-align: center;
-    margin-top: 12px;
+    background: rgba(255,167,38,0.1); border: 1px solid rgba(255,167,38,0.3);
+    border-radius: 10px; padding: 14px 16px; text-align: center; margin-top: 12px;
   }
-
   .countdown-badge .cd-label { font-size: 11px; color: var(--amber); letter-spacing: 0.5px; font-weight: 600; text-transform: uppercase; }
   .countdown-badge .cd-value { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--amber); font-weight: 700; margin-top: 2px; }
   .countdown-badge .cd-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
 
   /* KEY LEVELS */
-  .key-levels {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .level-item {
-    background: var(--bg4);
-    border-radius: 10px;
-    padding: 12px;
-    border-left: 3px solid var(--border);
-  }
-
+  .key-levels { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .level-item { background: var(--bg4); border-radius: 10px; padding: 12px; border-left: 3px solid var(--border); }
   .level-item.achieved { border-left-color: var(--green); }
   .level-item.pending { border-left-color: var(--amber); }
   .level-item.far { border-left-color: var(--red); }
   .level-item.watch { border-left-color: var(--blue); }
-
   .level-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
   .level-value { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 600; }
   .level-status { font-size: 11px; margin-top: 2px; }
@@ -704,82 +284,77 @@
   .status-pending { color: var(--amber); }
   .status-far { color: var(--red); }
 
-  /* CAPITAL ENTRY */
   .entry-zones { display: flex; flex-direction: column; gap: 8px; }
-
-  .entry-zone {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
+  .entry-zone { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
   .entry-zone .ez-label { font-size: 14px; font-weight: 500; }
   .entry-zone .ez-range { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--gold); }
   .entry-zone .ez-action { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
 
-  /* RETURN PROJECTIONS */
   .projection-table { display: flex; flex-direction: column; gap: 6px; }
-
-  .proj-row {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 2fr 1.5fr;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .proj-row.header-row {
-    background: var(--bg4);
-    padding: 8px 14px;
-  }
-
-  .proj-row.header-row span {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-
+  .proj-row { display: grid; grid-template-columns: 2fr 1.5fr 2fr 1.5fr; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; align-items: center; gap: 4px; }
+  .proj-row.header-row { background: var(--bg4); padding: 8px 14px; }
+  .proj-row.header-row span { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; color: var(--text-muted); text-transform: uppercase; }
   .proj-row span { font-size: 13px; font-family: 'DM Mono', monospace; }
   .proj-target { color: var(--text-dim); font-family: 'DM Sans', sans-serif !important; font-size: 13px !important; }
   .proj-value { color: var(--text); font-weight: 600; }
   .proj-profit { color: var(--green); font-weight: 600; }
   .proj-highlight { color: var(--gold); }
 
-  /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 20px 0;
-  }
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+  .footer { text-align: center; font-size: 11px; color: var(--text-muted); padding: 20px; line-height: 1.6; }
 
-  /* FOOTER */
-  .footer {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-muted);
-    padding: 20px;
-    line-height: 1.6;
+  /* HISTORY TAB */
+  .history-save-btn {
+    width: 100%; padding: 14px; background: var(--bg3); border: 1px solid var(--gold-dim);
+    border-radius: 12px; color: var(--gold); font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 16px; transition: all 0.2s;
   }
+  .history-save-btn:active { background: rgba(201,168,76,0.1); transform: scale(0.98); }
 
-  /* ADVICE PLACEHOLDER */
-  .advice-placeholder {
-    text-align: center;
-    padding: 32px 20px;
-    color: var(--text-dim);
+  .history-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .history-entry {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; cursor: pointer; transition: all 0.2s;
   }
+  .history-entry:active { border-color: var(--gold); }
+  .history-entry-header { display: flex; justify-content: space-between; align-items: center; }
+  .history-entry-date { font-size: 14px; font-weight: 600; color: var(--text); }
+  .history-entry-total { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--gold); }
+  .history-entry-pl { font-size: 12px; margin-top: 4px; }
 
-  .advice-placeholder .ph-icon { font-size: 48px; margin-bottom: 12px; }
-  .advice-placeholder .ph-text { font-size: 15px; line-height: 1.5; }
-  .advice-placeholder .ph-sub { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+  .history-detail {
+    display: none; margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .history-detail.open { display: block; }
+  .history-detail-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .history-detail-row:last-child { border-bottom: none; }
+  .history-detail-label { color: var(--text-dim); }
+  .history-detail-val { font-family: 'DM Mono', monospace; font-weight: 500; }
+
+  .history-empty { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+  .history-empty .ph-icon { font-size: 40px; margin-bottom: 10px; }
+  .history-empty .ph-text { font-size: 14px; line-height: 1.6; }
+
+  .history-clear-btn {
+    width: 100%; padding: 10px; background: transparent; border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; cursor: pointer; margin-top: 16px;
+  }
+  .history-clear-btn:active { border-color: var(--red); color: var(--red); }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--green-dim); color: #fff; padding: 10px 20px; border-radius: 20px;
+    font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .toast.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -791,7 +366,7 @@
       <div class="brand-icon">J</div>
       <div class="brand-text">
         <h1>Gold Portfolio · Jules</h1>
-        <p>KAB UE · UEP · Physical · Ar-Rahnu</p>
+        <p>KAB UE · UEP · Physical · ARBM</p>
       </div>
     </div>
     <div class="total-value-badge">
@@ -800,32 +375,36 @@
     </div>
   </div>
 
-  <div class="rates-bar">
-    <div class="rate-input-group">
-      <label>Spot (RM/g) <span class="live-dot" style="display:inline-block;vertical-align:middle;margin-left:4px;"></span></label>
-      <input type="number" class="rate-input" id="spotInput" placeholder="0.00" oninput="updateDashboard()">
-    </div>
+  <!-- ROW 1: UE SELL | UEP SELL -->
+  <div class="rates-row1">
     <div class="rate-input-group">
       <label>UE Sell (RM/g)</label>
       <input type="number" class="rate-input" id="ueSellInput" placeholder="0.00" oninput="updateDashboard()">
     </div>
-  </div>
-  <div class="rates-row2">
     <div class="rate-input-group">
       <label>UEP Sell (RM/g)</label>
       <input type="number" class="rate-input" id="uepSellInput" placeholder="0.00" oninput="updateDashboard()">
     </div>
-    <button class="btn btn-outline" onclick="autoFetchSpot()">⟳ Spot</button>
-    <button class="btn btn-gold" onclick="updateDashboard()">Update</button>
+  </div>
+
+  <!-- ROW 2: SPOT + UPDATE BUTTON -->
+  <div class="rates-row2">
+    <div class="rate-input-group">
+      <label>Spot (RM/g) <span class="live-dot" style="display:inline-block;vertical-align:middle;margin-left:4px;"></span></label>
+      <input type="number" class="rate-input" id="spotInput" placeholder="0.00" oninput="updateDashboard()">
+    </div>
+    <div style="display:flex;gap:6px;align-items:flex-end;">
+      <button class="btn btn-gold" onclick="updateDashboard()">Update</button>
+    </div>
   </div>
 </div>
 
-<!-- TABS -->
+<!-- TABS: Overview | Gold Advice | History | ARBM -->
 <div class="tabs">
   <div class="tab active" onclick="switchTab('overview')">Overview</div>
-  <div class="tab" onclick="switchTab('arrahnu')">Ar-Rahnu</div>
   <div class="tab" onclick="switchTab('advice')">Gold Advice</div>
   <div class="tab" onclick="switchTab('history')">History</div>
+  <div class="tab" onclick="switchTab('arbm')">ARBM</div>
 </div>
 
 <!-- ===================== OVERVIEW TAB ===================== -->
@@ -841,7 +420,7 @@
     <div class="summary-card">
       <div class="card-label">Total Invested</div>
       <div class="card-value white-value" style="font-size:20px;">RM 278,080</div>
-      <div class="card-sub">incl. +RM 10K new</div>
+      <div class="card-sub">incl. latest UEP buy</div>
     </div>
     <div class="summary-card">
       <div class="card-label">Current Value</div>
@@ -858,11 +437,7 @@
   <p class="section-label">Portfolio Breakdown</p>
   <div class="breakdown-table">
     <div class="breakdown-header">
-      <span>Category</span>
-      <span>Gold (g)</span>
-      <span>Invested</span>
-      <span>Value</span>
-      <span>Return</span>
+      <span>Category</span><span>Gold (g)</span><span>Invested</span><span>Value</span><span>Return</span>
     </div>
     <div class="breakdown-row">
       <span><div class="category-badge badge-ue">Digital UE</div></span>
@@ -873,8 +448,8 @@
     </div>
     <div class="breakdown-row">
       <span><div class="category-badge badge-uep">Digital UEP</div></span>
-      <span>94.65</span>
-      <span style="font-size:12px;">RM 55,000</span>
+      <span>94.653</span>
+      <span style="font-size:12px;">RM 60,000</span>
       <span id="uepValue">—</span>
       <span id="uepReturn" style="font-size:12px;">—</span>
     </div>
@@ -886,7 +461,7 @@
       <span id="physReturn" style="font-size:12px;">—</span>
     </div>
     <div class="breakdown-row">
-      <span><div class="category-badge badge-ar">Ar-Rahnu</div></span>
+      <span><div class="category-badge badge-ar">ARBM</div></span>
       <span>100.00</span>
       <span style="font-size:12px;">RM 61,180</span>
       <span id="arValue">—</span>
@@ -897,34 +472,22 @@
   <p class="section-label">Breakeven Progress</p>
   <div class="be-section">
     <div class="be-row">
-      <div class="be-top">
-        <span class="be-name">Digital UE</span>
-        <span class="be-status" id="ueBeStatus">—</span>
-      </div>
+      <div class="be-top"><span class="be-name">Digital UE</span><span class="be-status" id="ueBeStatus">—</span></div>
       <div class="be-bar-bg"><div class="be-bar-fill fill-blue" id="ueBeBar" style="width:0%"></div></div>
       <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 657.53/g</div>
     </div>
     <div class="be-row">
-      <div class="be-top">
-        <span class="be-name">Digital UEP</span>
-        <span class="be-status" id="uepBeStatus">—</span>
-      </div>
+      <div class="be-top"><span class="be-name">Digital UEP</span><span class="be-status" id="uepBeStatus">—</span></div>
       <div class="be-bar-bg"><div class="be-bar-fill fill-green" id="uepBeBar" style="width:0%"></div></div>
-      <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 633.89/g</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 634.00/g</div>
     </div>
     <div class="be-row">
-      <div class="be-top">
-        <span class="be-name">Physical Gold</span>
-        <span class="be-status" id="physBeStatus">—</span>
-      </div>
+      <div class="be-top"><span class="be-name">Physical Gold</span><span class="be-status" id="physBeStatus">—</span></div>
       <div class="be-bar-bg"><div class="be-bar-fill fill-gold" id="physBeBar" style="width:0%"></div></div>
       <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 671.00/g spot</div>
     </div>
     <div class="be-row">
-      <div class="be-top">
-        <span class="be-name">Ar-Rahnu (true)</span>
-        <span class="be-status" id="arBeStatus">—</span>
-      </div>
+      <div class="be-top"><span class="be-name">ARBM (true)</span><span class="be-status" id="arBeStatus">—</span></div>
       <div class="be-bar-bg"><div class="be-bar-fill fill-amber" id="arBeBar" style="width:0%"></div></div>
       <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">BE at RM 715.04/g spot</div>
     </div>
@@ -962,7 +525,7 @@
         <span class="scenario-price" style="color:var(--blue);"></span>
       </div>
       <div class="scenario-desc" id="watchLevels">
-        Spot now: — &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 633.89/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g
+        Spot now: — &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 634.00/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; ARBM BE: RM 715.04/g
       </div>
     </div>
   </div>
@@ -970,61 +533,19 @@
   <div class="footer">
     Personal tracking tool · Not financial advice<br>
     KAB rates from KAB app · Spot from goldprice.org<br>
-    Ar-Rahnu: Bank Muamalat · Financing: 02 Mar 2026 · Maturity: 02 Sep 2027
-  </div>
-</div>
-
-<!-- ===================== AR-RAHNU TAB ===================== -->
-<div id="tab-arrahnu" class="tab-content">
-  
-  <p class="section-label">Contract Details</p>
-  <div class="ar-card">
-    <div class="ar-card-title">Bank Muamalat Ar-Rahnu</div>
-    <div class="ar-row"><span class="ar-label">Financing Date</span><span class="ar-value">02 Mar 2026</span></div>
-    <div class="ar-row"><span class="ar-label">Maturity Date</span><span class="ar-value">02 Sep 2027</span></div>
-    <div class="ar-row"><span class="ar-label">Gold Pledged</span><span class="ar-value gold-value">100.00 g</span></div>
-    <div class="ar-row"><span class="ar-label">Principal Financed</span><span class="ar-value">RM 61,180</span></div>
-    <div class="ar-row"><span class="ar-label">True Breakeven</span><span class="ar-value" style="color:var(--amber);">RM 715.04/g</span></div>
-    <div class="ar-row"><span class="ar-label">Current Spot</span><span class="ar-value" id="arSpotDisplay">—</span></div>
-    <div class="ar-row"><span class="ar-label">Gap to Breakeven</span><span class="ar-value" id="arGap" style="color:var(--red);">—</span></div>
-
-    <div class="countdown-badge" id="countdownBadge">
-      <div class="cd-label">Days to Maturity</div>
-      <div class="cd-value" id="daysToMaturity">—</div>
-      <div class="cd-sub">02 September 2027</div>
-    </div>
-  </div>
-
-  <p class="section-label">Payment Schedule</p>
-  <div class="ar-card">
-    <div class="ar-card-title">Profit Payments (Ujrah)</div>
-    <div class="ar-row"><span class="ar-label">Oct 2026 (6 months)</span><span class="ar-value">RM —</span></div>
-    <div class="ar-row"><span class="ar-label">Apr 2027 (12 months)</span><span class="ar-value">RM —</span></div>
-    <div class="ar-row"><span class="ar-label">Sep 2027 (Maturity)</span><span class="ar-value">RM —</span></div>
-    <div style="font-size:12px;color:var(--text-muted);margin-top:12px;">⚠️ Ar-Rahnu advice will be flagged from August 2026 ahead of the October payment deadline.</div>
-  </div>
-
-  <p class="section-label">Overlapping Strategy</p>
-  <div class="ar-card">
-    <div class="ar-card-title">When to Consider Overlap</div>
-    <div style="font-size:14px;color:var(--text-dim);line-height:1.7;">
-      Once spot clears <strong style="color:var(--amber);">RM 715/g</strong>, the Ar-Rahnu position moves into true profit. At that point, consider redeeming and re-pledging at the higher gold value to extract additional capital for further UEP accumulation.<br><br>
-      <strong style="color:var(--gold);">Flag date: August 2026.</strong> Do not act before then.
-    </div>
+    ARBM: Bank Muamalat · Financing: 02 Mar 2026 · Maturity: 02 Sep 2027
   </div>
 </div>
 
 <!-- ===================== GOLD ADVICE TAB ===================== -->
 <div id="tab-advice" class="tab-content">
 
-  <!-- TRIGGER BUTTON -->
   <button class="brief-trigger" id="briefBtn" onclick="generateBrief()">
     <span>☀️</span> Get Morning Brief
   </button>
 
   <div class="brief-timestamp" id="briefTimestamp">Tap above to generate today's live gold analysis</div>
 
-  <!-- VERDICT BANNER -->
   <div class="verdict-banner loading" id="verdictBanner">
     <div class="verdict-icon" id="verdictIcon">⏳</div>
     <div class="verdict-text">
@@ -1034,7 +555,6 @@
     </div>
   </div>
 
-  <!-- MARKETS NOW -->
   <div class="advice-section" id="marketsSection">
     <div class="advice-section-title">Markets Right Now</div>
     <div class="markets-grid" id="marketsGrid">
@@ -1061,7 +581,6 @@
     </div>
   </div>
 
-  <!-- WHY -->
   <div class="advice-section" id="whySection">
     <div class="advice-section-title">Why</div>
     <ul class="why-list" id="whyList">
@@ -1072,7 +591,6 @@
     </ul>
   </div>
 
-  <!-- ACTION PLAN -->
   <div class="advice-section" id="actionSection">
     <div class="advice-section-title">Action Plan</div>
     <div class="action-list" id="actionList">
@@ -1085,7 +603,6 @@
 
   <div class="divider"></div>
 
-  <!-- KEY PRICE LEVELS -->
   <p class="section-label">Key Price Levels</p>
   <div class="key-levels">
     <div class="level-item" id="spotLevel">
@@ -1100,11 +617,11 @@
     </div>
     <div class="level-item" id="uepBeLevel">
       <div class="level-label">UEP Breakeven</div>
-      <div class="level-value">RM 633.89</div>
+      <div class="level-value">RM 634.00</div>
       <div class="level-status" id="uepBeLevel2">—</div>
     </div>
     <div class="level-item" id="arBeLevel">
-      <div class="level-label">Ar-Rahnu BE (true)</div>
+      <div class="level-label">ARBM BE (true)</div>
       <div class="level-value">RM 715.04</div>
       <div class="level-status" id="arBeLevel2">—</div>
     </div>
@@ -1112,42 +629,28 @@
 
   <div class="divider"></div>
 
-  <!-- ENTRY ZONES -->
   <p class="section-label">Entry Zones</p>
   <div class="entry-zones">
     <div class="entry-zone">
-      <div>
-        <div class="ez-label">🟢 Strong Buy Zone</div>
-        <div class="ez-action">Deploy aggressively — floor pricing</div>
-      </div>
+      <div><div class="ez-label">🟢 Strong Buy Zone</div><div class="ez-action">Deploy aggressively — floor pricing</div></div>
       <div class="ez-range">RM 560–580</div>
     </div>
     <div class="entry-zone">
-      <div>
-        <div class="ez-label">🟡 Accumulate Zone</div>
-        <div class="ez-action">Add tranches — recovery in progress</div>
-      </div>
+      <div><div class="ez-label">🟡 Accumulate Zone</div><div class="ez-action">Add tranches — recovery in progress</div></div>
       <div class="ez-range">RM 580–620</div>
     </div>
     <div class="entry-zone">
-      <div>
-        <div class="ez-label">🟠 Watch Zone</div>
-        <div class="ez-action">Hold cash — wait for pullback</div>
-      </div>
+      <div><div class="ez-label">🟠 Watch Zone</div><div class="ez-action">Hold cash — wait for pullback</div></div>
       <div class="ez-range">RM 620–660</div>
     </div>
     <div class="entry-zone">
-      <div>
-        <div class="ez-label">🔴 Hold Cash</div>
-        <div class="ez-action">Market timing — wait for better entry</div>
-      </div>
+      <div><div class="ez-label">🔴 Hold Cash</div><div class="ez-action">Market timing — wait for better entry</div></div>
       <div class="ez-range">RM 660+</div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- CAPITAL PLANNING -->
   <p class="section-label">Capital Planning — RM 50K Tranche</p>
   <div class="scenario-grid">
     <div class="scenario-card">
@@ -1182,14 +685,10 @@
 
   <div class="divider"></div>
 
-  <!-- RETURN PROJECTIONS -->
-  <p class="section-label">Return Projections (431.73g)</p>
+  <p class="section-label">Return Projections (431.733g)</p>
   <div class="projection-table">
     <div class="proj-row header-row">
-      <span>Target</span>
-      <span>USD Gold</span>
-      <span>Portfolio Value</span>
-      <span>Profit</span>
+      <span>Target</span><span>USD Gold</span><span>Portfolio Value</span><span>Profit</span>
     </div>
     <div class="proj-row">
       <span class="proj-target">Goldman (base)</span>
@@ -1222,39 +721,76 @@
 
 <!-- ===================== HISTORY TAB ===================== -->
 <div id="tab-history" class="tab-content">
-  <p class="section-label">Recent Purchases</p>
-  <div class="breakdown-table">
-    <div class="breakdown-header" style="grid-template-columns:1.5fr 1fr 1.2fr 1.2fr;">
-      <span>Date</span><span>Type</span><span>Grams</span><span>Price/g</span>
-    </div>
-    <div class="breakdown-row" style="grid-template-columns:1.5fr 1fr 1.2fr 1.2fr;">
-      <span style="font-size:12px;color:var(--text-dim);">31 Mar 2026</span>
-      <span><div class="category-badge badge-uep" style="font-size:11px;">UEP</div></span>
-      <span>7.9365</span>
-      <span style="color:var(--gold);">RM 630</span>
-    </div>
-    <div class="breakdown-row" style="grid-template-columns:1.5fr 1fr 1.2fr 1.2fr;">
-      <span style="font-size:12px;color:var(--text-dim);">02 Mar 2026</span>
-      <span><div class="category-badge badge-ar" style="font-size:11px;">Ar-Rahnu</div></span>
-      <span>100.00</span>
-      <span style="color:var(--gold);">Pledge</span>
+
+  <button class="history-save-btn" onclick="saveSnapshot()">
+    📸 Save Today's Snapshot
+  </button>
+
+  <p class="section-label">Daily Snapshots</p>
+  <div class="history-list" id="historyList">
+    <div class="history-empty">
+      <div class="ph-icon">📅</div>
+      <div class="ph-text">No snapshots yet.<br>Tap "Save Today's Snapshot" each day to track your portfolio history.</div>
     </div>
   </div>
-  <div class="footer" style="margin-top:24px;">History entries are manually maintained</div>
+
+  <button class="history-clear-btn" onclick="clearHistory()">Clear All History</button>
 </div>
+
+<!-- ===================== ARBM TAB ===================== -->
+<div id="tab-arbm" class="tab-content">
+  
+  <p class="section-label">Contract Details</p>
+  <div class="ar-card">
+    <div class="ar-card-title">Bank Muamalat ARBM</div>
+    <div class="ar-row"><span class="ar-label">Financing Date</span><span class="ar-value">02 Mar 2026</span></div>
+    <div class="ar-row"><span class="ar-label">Maturity Date</span><span class="ar-value">02 Sep 2027</span></div>
+    <div class="ar-row"><span class="ar-label">Gold Pledged</span><span class="ar-value gold-value">100.00 g</span></div>
+    <div class="ar-row"><span class="ar-label">Principal Financed</span><span class="ar-value">RM 61,180</span></div>
+    <div class="ar-row"><span class="ar-label">True Breakeven</span><span class="ar-value" style="color:var(--amber);">RM 715.04/g</span></div>
+    <div class="ar-row"><span class="ar-label">Current Spot</span><span class="ar-value" id="arSpotDisplay">—</span></div>
+    <div class="ar-row"><span class="ar-label">Gap to Breakeven</span><span class="ar-value" id="arGap" style="color:var(--red);">—</span></div>
+
+    <div class="countdown-badge" id="countdownBadge">
+      <div class="cd-label">Days to Maturity</div>
+      <div class="cd-value" id="daysToMaturity">—</div>
+      <div class="cd-sub">02 September 2027</div>
+    </div>
+  </div>
+
+  <p class="section-label">Payment Schedule</p>
+  <div class="ar-card">
+    <div class="ar-card-title">Profit Payments (Ujrah)</div>
+    <div class="ar-row"><span class="ar-label">Oct 2026 (6 months)</span><span class="ar-value">RM —</span></div>
+    <div class="ar-row"><span class="ar-label">Apr 2027 (12 months)</span><span class="ar-value">RM —</span></div>
+    <div class="ar-row"><span class="ar-label">Sep 2027 (Maturity)</span><span class="ar-value">RM —</span></div>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:12px;">⚠️ ARBM advice will be flagged from August 2026 ahead of the October payment deadline.</div>
+  </div>
+
+  <p class="section-label">Overlapping Strategy</p>
+  <div class="ar-card">
+    <div class="ar-card-title">When to Consider Overlap</div>
+    <div style="font-size:14px;color:var(--text-dim);line-height:1.7;">
+      Once spot clears <strong style="color:var(--amber);">RM 715/g</strong>, the ARBM position moves into true profit. At that point, consider redeeming and re-pledging at the higher gold value to extract additional capital for further UEP accumulation.<br><br>
+      <strong style="color:var(--gold);">Flag date: August 2026.</strong> Do not act before then.
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
 // =================== PORTFOLIO DATA ===================
-// Last updated: 7 Apr 2026 — UEP purchase RM5k @ RM643/g (7.776g)
 const portfolio = {
   ue:   { grams: 165.3783, invested: 108800, be: 657.53 },
-  uep:  { grams: 94.653,   invested: 60000,  be: 633.89 },
+  uep:  { grams: 94.653,   invested: 60000,  be: 634.00 },
   phys: { grams: 71.70,    invested: 48100,  be: 671.00 },
   ar:   { grams: 100.00,   invested: 61180,  be: 715.04 }
 };
 const totalInvested = 278080;
-const totalGrams = 431.73;
-const myrRate = 4.05; // default USD/MYR
+const totalGrams = 431.733;
+const myrRate = 4.05;
 
 // =================== TAB SWITCHING ===================
 function switchTab(tab) {
@@ -1262,7 +798,8 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
   event.target.classList.add('active');
-  if(tab === 'advice') updateAdviceLevels();
+  if (tab === 'advice') updateAdviceLevels();
+  if (tab === 'history') renderHistory();
 }
 
 // =================== FORMAT HELPERS ===================
@@ -1272,57 +809,50 @@ const pct = (n) => (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
 
 // =================== MAIN UPDATE ===================
 function updateDashboard() {
-  const spot = parseFloat(document.getElementById('spotInput').value) || 0;
-  const ueSell = parseFloat(document.getElementById('ueSellInput').value) || 0;
+  const spot    = parseFloat(document.getElementById('spotInput').value)    || 0;
+  const ueSell  = parseFloat(document.getElementById('ueSellInput').value)  || 0;
   const uepSell = parseFloat(document.getElementById('uepSellInput').value) || 0;
 
   if (!spot && !ueSell && !uepSell) return;
 
-  // Use spot as fallback for physical & ar-rahnu
   const physSell = spot;
-  const arSell = spot;
+  const arSell   = spot;
 
-  // Values
-  const ueVal   = ueSell  ? portfolio.ue.grams   * ueSell  : 0;
-  const uepVal  = uepSell ? portfolio.uep.grams   * uepSell : 0;
-  const physVal = physSell ? portfolio.phys.grams * physSell : 0;
-  const arVal   = arSell  ? portfolio.ar.grams    * arSell  : 0;
+  const ueVal   = ueSell   ? portfolio.ue.grams   * ueSell   : 0;
+  const uepVal  = uepSell  ? portfolio.uep.grams   * uepSell  : 0;
+  const physVal = physSell ? portfolio.phys.grams  * physSell : 0;
+  const arVal   = arSell   ? portfolio.ar.grams    * arSell   : 0;
   const total   = ueVal + uepVal + physVal + arVal;
 
-  // Header
   document.getElementById('headerValue').textContent = total ? fmt(total) : '—';
   document.getElementById('totalValue').textContent  = total ? fmt(total) : '—';
 
-  // P/L
-  const pl = total - totalInvested;
+  const pl    = total - totalInvested;
   const plPct = (pl / totalInvested) * 100;
-  const plEl = document.getElementById('totalPL');
+  const plEl  = document.getElementById('totalPL');
   const plCard = document.getElementById('plCard');
   plEl.textContent = total ? fmtDiff(pl) : '—';
   plEl.className = 'card-value ' + (pl >= 0 ? 'green-value' : 'red-value');
   plCard.className = 'summary-card ' + (pl >= 0 ? 'profit-pos' : 'profit-neg');
   document.getElementById('totalPLPct').textContent = total ? pct(plPct) + ' unrealised' : '—';
 
-  // Breakdown
   const setRow = (id, val, invested) => {
     if (!val) return;
     const diff = val - invested;
-    const r = (diff/invested)*100;
-    document.getElementById(id+'Value').textContent = fmt(val);
-    document.getElementById(id+'Value').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
-    document.getElementById(id+'Return').textContent = pct(r);
-    document.getElementById(id+'Return').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
+    const r = (diff / invested) * 100;
+    document.getElementById(id + 'Value').textContent = fmt(val);
+    document.getElementById(id + 'Value').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
+    document.getElementById(id + 'Return').textContent = pct(r);
+    document.getElementById(id + 'Return').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
   };
-  if(ueSell)  setRow('ue',   ueVal,   portfolio.ue.invested);
-  if(uepSell) setRow('uep',  uepVal,  portfolio.uep.invested);
-  if(physSell) setRow('phys', physVal, portfolio.phys.invested);
-  if(arSell)  setRow('ar',   arVal,   portfolio.ar.invested);
+  if (ueSell)   setRow('ue',   ueVal,   portfolio.ue.invested);
+  if (uepSell)  setRow('uep',  uepVal,  portfolio.uep.invested);
+  if (physSell) setRow('phys', physVal, portfolio.phys.invested);
+  if (arSell)   setRow('ar',   arVal,   portfolio.ar.invested);
 
-  // Breakeven bars
   const updateBe = (prefix, currentPrice, be) => {
     const ratio = Math.min(currentPrice / be, 1.0);
-    const pctNum = (currentPrice / be) * 100;
-    document.getElementById(prefix + 'BeBar').style.width = (Math.min(ratio, 1) * 100) + '%';
+    document.getElementById(prefix + 'BeBar').style.width = (ratio * 100) + '%';
     const statusEl = document.getElementById(prefix + 'BeStatus');
     if (currentPrice >= be) {
       statusEl.textContent = '✓ Breakeven reached';
@@ -1333,32 +863,36 @@ function updateDashboard() {
       statusEl.className = 'be-status ' + (parseFloat(gap) < 10 ? 'be-pending' : 'be-far');
     }
   };
-
-  if(ueSell)  updateBe('ue',   ueSell,  portfolio.ue.be);
-  if(uepSell) updateBe('uep',  uepSell, portfolio.uep.be);
-  if(spot) {
+  if (ueSell)  updateBe('ue',   ueSell,  portfolio.ue.be);
+  if (uepSell) updateBe('uep',  uepSell, portfolio.uep.be);
+  if (spot) {
     updateBe('phys', spot, portfolio.phys.be);
     updateBe('ar',   spot, portfolio.ar.be);
   }
 
-  // Scenarios (using avg sell)
   if (total) {
-    // Bear: RM 540/g avg sell
     const bearVal = totalGrams * 540;
-    document.getElementById('bearValue').textContent = fmt(bearVal) + ' (' + pct((bearVal-totalInvested)/totalInvested*100) + ')';
-    // Base: RM 640/g avg
+    document.getElementById('bearValue').textContent = fmt(bearVal) + ' (' + pct((bearVal - totalInvested) / totalInvested * 100) + ')';
     const baseVal = totalGrams * 640;
-    document.getElementById('baseValue').textContent = fmt(baseVal) + ' (' + pct((baseVal-totalInvested)/totalInvested*100) + ')';
-    // Bull: RM 820/g avg (≈$6300)
+    document.getElementById('baseValue').textContent = fmt(baseVal) + ' (' + pct((baseVal - totalInvested) / totalInvested * 100) + ')';
     const bullVal = totalGrams * 820;
-    document.getElementById('bullValue').textContent = fmt(bullVal) + ' (' + pct((bullVal-totalInvested)/totalInvested*100) + ')';
+    document.getElementById('bullValue').textContent = fmt(bullVal) + ' (' + pct((bullVal - totalInvested) / totalInvested * 100) + ')';
   }
 
-  // Watch levels
   document.getElementById('watchLevels').innerHTML =
-    `Spot now: <strong>${spot ? 'RM '+spot+'/g' : '—'}</strong> &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 633.89/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; Ar-Rahnu BE: RM 715.04/g`;
+    `Spot now: <strong>${spot ? 'RM ' + spot + '/g' : '—'}</strong> &nbsp;|&nbsp; UE BE: RM 657.53/g &nbsp;|&nbsp; UEP BE: RM 634.00/g &nbsp;|&nbsp; Physical BE: RM 671/g &nbsp;|&nbsp; ARBM BE: RM 715.04/g`;
 
-  // Projections (USD targets → RM at 4.05 MYR)
+  document.getElementById('arSpotDisplay').textContent = spot ? 'RM ' + spot + '/g' : '—';
+  if (spot) {
+    const gap = 715.04 - spot;
+    const gapEl = document.getElementById('arGap');
+    gapEl.textContent = gap > 0 ? 'RM ' + gap.toFixed(2) + '/g below BE' : '✓ Above BE';
+    gapEl.style.color = gap > 0 ? 'var(--red)' : 'var(--green)';
+  }
+
+  updateAdviceLevels(spot);
+  updateCountdown();
+
   const project = (usdPerOz, id, plId) => {
     const rmPerGram = (usdPerOz / 31.1035) * myrRate;
     const val = totalGrams * rmPerGram;
@@ -1370,21 +904,6 @@ function updateDashboard() {
   project(6000, 'proj6000', 'projPL6000');
   project(6300, 'proj6300', 'projPL6300');
   project(7200, 'proj7200', 'projPL7200');
-
-  // Ar-Rahnu tab
-  document.getElementById('arSpotDisplay').textContent = spot ? 'RM ' + spot + '/g' : '—';
-  if (spot) {
-    const gap = 715.04 - spot;
-    const gapEl = document.getElementById('arGap');
-    gapEl.textContent = gap > 0 ? 'RM ' + gap.toFixed(2) + '/g below BE' : '✓ Above BE';
-    gapEl.style.color = gap > 0 ? 'var(--red)' : 'var(--green)';
-  }
-
-  // Advice tab levels
-  updateAdviceLevels(spot);
-
-  // Countdown
-  updateCountdown();
 }
 
 // =================== ADVICE LEVELS ===================
@@ -1397,21 +916,21 @@ function updateAdviceLevels(spot) {
 
   const checkBe = (val, be, statusId, itemId) => {
     const statusEl = document.getElementById(statusId);
-    const itemEl = document.getElementById(itemId);
+    const itemEl   = document.getElementById(itemId);
     if (val >= be) {
       statusEl.textContent = '✓ Reached';
       statusEl.className = 'level-status status-achieved';
       itemEl.className = 'level-item achieved';
     } else {
-      const gap = ((be - val)/be*100).toFixed(1);
+      const gap = ((be - val) / be * 100).toFixed(1);
       statusEl.textContent = gap + '% away';
       statusEl.className = 'level-status status-pending';
       itemEl.className = 'level-item pending';
     }
   };
 
-  checkBe(parseFloat(document.getElementById('ueSellInput').value)||s,  657.53, 'ueBeLevel2',  'ueBeLevel');
-  checkBe(parseFloat(document.getElementById('uepSellInput').value)||s, 633.89, 'uepBeLevel2', 'uepBeLevel');
+  checkBe(parseFloat(document.getElementById('ueSellInput').value)  || s, 657.53, 'ueBeLevel2',  'ueBeLevel');
+  checkBe(parseFloat(document.getElementById('uepSellInput').value) || s, 634.00, 'uepBeLevel2', 'uepBeLevel');
   checkBe(s, 715.04, 'arBeLevel2', 'arBeLevel');
 }
 
@@ -1423,17 +942,6 @@ function updateCountdown() {
   document.getElementById('daysToMaturity').textContent = days;
 }
 
-// =================== AUTO FETCH SPOT ===================
-async function autoFetchSpot() {
-  const btn = document.querySelector('.btn-outline');
-  btn.textContent = '⟳ ...';
-  try {
-    // Try to get from goldprice.org embed (fallback to prompt)
-    alert('Open goldprice.org/gold-price-malaysia.html and enter the spot price manually.');
-  } catch(e) {}
-  btn.textContent = '⟳ Spot';
-}
-
 // =================== GENERATE MORNING BRIEF ===================
 async function generateBrief() {
   const btn = document.getElementById('briefBtn');
@@ -1441,54 +949,35 @@ async function generateBrief() {
   btn.innerHTML = '<div class="spinner"></div> Fetching live market data...';
 
   const now = new Date();
-  document.getElementById('briefTimestamp').textContent = 'Generating brief — ' + now.toLocaleString('en-MY', {timeZone:'Asia/Kuala_Lumpur', hour:'2-digit', minute:'2-digit', day:'numeric', month:'short', year:'numeric'});
+  document.getElementById('briefTimestamp').textContent = 'Generating brief — ' + now.toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur', hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short', year: 'numeric' });
 
   try {
-    const spot = parseFloat(document.getElementById('spotInput').value) || 0;
+    const spot    = parseFloat(document.getElementById('spotInput').value)    || 0;
     const uepSell = parseFloat(document.getElementById('uepSellInput').value) || 0;
 
-    const prompt = `You are Jules' personal gold investment advisor. Jules holds a Malaysian gold portfolio:
-- Total: 431.73g across KAB Digital UE (165.38g), UEP (94.65g), Physical (71.70g), Ar-Rahnu pledge (100g)
+    const prompt = `You are Jules personal gold investment advisor. Jules holds a Malaysian gold portfolio:
+- Total: 423.96g across KAB Digital UE (165.38g), UEP (94.653g), Physical (71.70g), ARBM pledge (100g)
 - Total invested: RM 278,080
-- KAB UE breakeven: RM 657.53/g | UEP breakeven: RM 633.89/g | Physical BE: RM 671/g | Ar-Rahnu true BE: RM 715.04/g
+- KAB UE breakeven: RM 657.53/g | UEP breakeven: RM 634.00/g | Physical BE: RM 671/g | ARBM true BE: RM 715.04/g
 - Current KAB UEP buy price: RM ${uepSell || 'unknown'}/g | Spot: RM ${spot || 'unknown'}/g
 - Strategy: accumulating to 500g+ for 6-figure profit target at $6,000+ gold
-- KAB locks price at purchase time (6am). So if gold is UP overnight → BUY before 9am. If DOWN → wait for lower 9am price.
+- KAB locks price at purchase time (6am). If gold UP overnight: BUY before 9am. If DOWN: wait for lower 9am price.
 
-Search for: live XAU/USD price, overnight movement, USD/MYR rate, any major gold news today.
+Search for: live XAU/USD price, overnight movement, USD/MYR rate, major gold news today.
 
-Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON):
-{
-  "verdict": "BUY NOW" or "WAIT" or "HOLD",
-  "verdictColor": "buy" or "wait" or "hold",
-  "verdictIcon": "🟢" or "🔴" or "🟡",
-  "verdictSub": "One sentence summary of the call",
-  "xauusd": "$X,XXX",
-  "xauusdChange": "+X.X% overnight",
-  "xauusdDir": "up" or "down" or "flat",
-  "usdmyr": "RM X.XX",
-  "usdmyrChange": "Ringgit stronger/weaker",
-  "kabEst": "RM XXX/g",
-  "kabChange": "vs yesterday",
-  "trend": "↑ Rising" or "↓ Falling" or "→ Flat",
-  "trendSub": "X-day streak",
-  "why": [
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 1"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 2"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 3"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 4"}
-  ],
-  "actions": [
-    {"icon": "emoji", "text": "Action step 1"},
-    {"icon": "emoji", "text": "Action step 2"},
-    {"icon": "emoji", "text": "Action step 3"}
-  ],
-  "timestamp": "Generated at X:XX am/pm KL time"
-}`;
+CRITICAL: Respond with ONLY a valid JSON object. No text before or after. No markdown. No code fences. Your entire response must be parseable by JSON.parse().
+
+Use this exact structure with real current data filled in:
+{"verdict":"BUY NOW","verdictColor":"buy","verdictIcon":"\u{1F7E2}","verdictSub":"One sentence summary","xauusd":"$3100","xauusdChange":"+0.5% overnight","xauusdDir":"up","usdmyr":"RM 4.45","usdmyrChange":"Ringgit weaker","kabEst":"RM 620/g","kabChange":"up vs yesterday","trend":"\u2191 Rising","trendSub":"3-day streak","why":[{"type":"positive","text":"Reason 1"},{"type":"negative","text":"Reason 2"},{"type":"neutral","text":"Reason 3"},{"type":"positive","text":"Reason 4"}],"actions":[{"icon":"\u{1F4B0}","text":"Action 1"},{"icon":"\u{1F4CA}","text":"Action 2"},{"icon":"\u23F0","text":"Action 3"}],"timestamp":"Generated at 8:00 am KL time"}
+
+Rules: verdict = BUY NOW or WAIT or HOLD. verdictColor = buy or wait or hold. xauusdDir = up or down or flat. All text values must be plain ASCII or simple unicode, no special characters that break JSON.`;
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -1497,20 +986,49 @@ Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON
       })
     });
 
+    if (!response.ok) {
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error?.message || 'HTTP ' + response.status);
+    }
+
     const data = await response.json();
-    const fullText = data.content.map(i => i.text || '').join('');
-    const clean = fullText.replace(/```json|```/g, '').trim();
-
-    // Extract JSON
-    const jsonMatch = clean.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('No JSON found');
-    const brief = JSON.parse(jsonMatch[0]);
-
+    const fullText = data.content.map(i => i.text || '').filter(Boolean).join('');
+    // Robust JSON extraction
+    let brief = null;
+    // Try 1: direct parse
+    try { brief = JSON.parse(fullText.trim()); } catch(e) {}
+    // Try 2: strip markdown fences
+    if (!brief) {
+      try {
+        const stripped = fullText.replace(/```json|```/g, '').trim();
+        brief = JSON.parse(stripped);
+      } catch(e) {}
+    }
+    // Try 3: extract first {...} block
+    if (!brief) {
+      const m = fullText.match(/\{[\s\S]*\}/);
+      if (m) {
+        try { brief = JSON.parse(m[0]); } catch(e) {}
+      }
+    }
+    // Try 4: extract and sanitize
+    if (!brief) {
+      const m = fullText.match(/\{[\s\S]*\}/);
+      if (m) {
+        const sanitized = m[0]
+          .replace(/[\u0000-\u001F\u007F]/g, ' ')
+          .replace(/,\s*([}\]])/g, '$1');
+        try { brief = JSON.parse(sanitized); } catch(e) {
+          throw new Error('JSON parse failed: ' + e.message);
+        }
+      }
+    }
+    if (!brief) throw new Error('No valid JSON in response');
     renderBrief(brief);
 
-  } catch(err) {
-    console.error(err);
-    renderError();
+  } catch (err) {
+    console.error('Gold Advice error:', err);
+    renderError(err.message);
   }
 
   btn.classList.remove('loading');
@@ -1519,62 +1037,203 @@ Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON
 
 // =================== RENDER BRIEF ===================
 function renderBrief(b) {
-  // Verdict
   const banner = document.getElementById('verdictBanner');
   banner.className = 'verdict-banner ' + (b.verdictColor || 'hold');
-  document.getElementById('verdictIcon').textContent = b.verdictIcon || '🟡';
-  document.getElementById('verdictMain').textContent = b.verdict || 'HOLD';
-  document.getElementById('verdictSub').textContent = b.verdictSub || '';
+  document.getElementById('verdictIcon').textContent  = b.verdictIcon || '🟡';
+  document.getElementById('verdictMain').textContent  = b.verdict    || 'HOLD';
+  document.getElementById('verdictSub').textContent   = b.verdictSub || '';
 
-  // Markets
-  document.getElementById('mXau').textContent = b.xauusd || '—';
-  document.getElementById('mXauChange').textContent = b.xauusdChange || '—';
-  document.getElementById('mXauChange').className = 'm-change ' + (b.xauusdDir === 'up' ? 'm-up' : b.xauusdDir === 'down' ? 'm-down' : 'm-flat');
-  document.getElementById('mMyr').textContent = b.usdmyr || '—';
-  document.getElementById('mMyrChange').textContent = b.usdmyrChange || '—';
-  document.getElementById('mMyrChange').className = 'm-change m-flat';
-  document.getElementById('mKab').textContent = b.kabEst || '—';
-  document.getElementById('mKabChange').textContent = b.kabChange || '—';
-  document.getElementById('mTrend').textContent = b.trend || '—';
-  document.getElementById('mTrendChange').textContent = b.trendSub || '—';
+  document.getElementById('mXau').textContent         = b.xauusd     || '—';
+  document.getElementById('mXauChange').textContent   = b.xauusdChange || '—';
+  document.getElementById('mXauChange').className     = 'm-change ' + (b.xauusdDir === 'up' ? 'm-up' : b.xauusdDir === 'down' ? 'm-down' : 'm-flat');
+  document.getElementById('mMyr').textContent         = b.usdmyr     || '—';
+  document.getElementById('mMyrChange').textContent   = b.usdmyrChange || '—';
+  document.getElementById('mMyrChange').className     = 'm-change m-flat';
+  document.getElementById('mKab').textContent         = b.kabEst     || '—';
+  document.getElementById('mKabChange').textContent   = b.kabChange  || '—';
+  document.getElementById('mTrend').textContent       = b.trend      || '—';
+  document.getElementById('mTrendChange').textContent = b.trendSub   || '—';
 
-  // Why
   const whyList = document.getElementById('whyList');
   whyList.innerHTML = (b.why || []).map(w => {
     const bClass = w.type === 'positive' ? 'bullet-green' : w.type === 'negative' ? 'bullet-red' : 'bullet-amber';
-    const icon = w.type === 'positive' ? '↑' : w.type === 'negative' ? '↓' : '→';
+    const icon   = w.type === 'positive' ? '↑' : w.type === 'negative' ? '↓' : '→';
     return `<li><span class="bullet ${bClass}">${icon}</span><span>${w.text}</span></li>`;
   }).join('');
 
-  // Actions
   const actionList = document.getElementById('actionList');
   actionList.innerHTML = (b.actions || []).map(a =>
     `<div class="action-item"><span class="action-icon">${a.icon || '📌'}</span><span>${a.text}</span></div>`
   ).join('');
 
-  // Timestamp
   document.getElementById('briefTimestamp').textContent = b.timestamp || ('Last updated: ' + new Date().toLocaleTimeString());
 }
 
 // =================== RENDER ERROR ===================
-function renderError() {
+function renderError(msg) {
   const banner = document.getElementById('verdictBanner');
   banner.className = 'verdict-banner loading';
   document.getElementById('verdictIcon').textContent = '⚠️';
   document.getElementById('verdictMain').textContent = 'Unable to fetch';
   document.getElementById('verdictMain').style.color = 'var(--text-dim)';
-  document.getElementById('verdictSub').textContent = 'Check your internet connection and try again.';
-  document.getElementById('briefTimestamp').textContent = 'Error generating brief — please retry';
+  document.getElementById('verdictSub').textContent  = (msg || 'Check your connection') + ' — please retry.';
+  document.getElementById('briefTimestamp').textContent = 'Error generating brief';
+}
+
+// =================== HISTORY (localStorage) ===================
+const HISTORY_KEY = 'gold_dashboard_history';
+
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  } catch(e) { return []; }
+}
+
+function saveHistory(arr) {
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+}
+
+function saveSnapshot() {
+  const spot    = parseFloat(document.getElementById('spotInput').value)    || 0;
+  const ueSell  = parseFloat(document.getElementById('ueSellInput').value)  || 0;
+  const uepSell = parseFloat(document.getElementById('uepSellInput').value) || 0;
+
+  if (!spot && !ueSell && !uepSell) {
+    showToast('⚠️ Enter rates first before saving.', true);
+    return;
+  }
+
+  const physSell = spot;
+  const arSell   = spot;
+  const ueVal    = ueSell   ? portfolio.ue.grams   * ueSell   : 0;
+  const uepVal   = uepSell  ? portfolio.uep.grams   * uepSell  : 0;
+  const physVal  = physSell ? portfolio.phys.grams  * physSell : 0;
+  const arVal    = arSell   ? portfolio.ar.grams    * arSell   : 0;
+  const total    = ueVal + uepVal + physVal + arVal;
+  const pl       = total - totalInvested;
+  const plPct    = total ? (pl / totalInvested * 100) : 0;
+
+  const now     = new Date();
+  const dateKey = now.toISOString().split('T')[0]; // YYYY-MM-DD
+  const label   = now.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+  const time    = now.toLocaleTimeString('en-MY', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kuala_Lumpur' });
+
+  const snapshot = {
+    dateKey, label, time,
+    spot, ueSell, uepSell,
+    total: Math.round(total),
+    pl: Math.round(pl),
+    plPct: plPct.toFixed(2),
+    ueVal:   Math.round(ueVal),
+    uepVal:  Math.round(uepVal),
+    physVal: Math.round(physVal),
+    arVal:   Math.round(arVal)
+  };
+
+  const history = getHistory();
+  // Replace if same day, otherwise prepend
+  const idx = history.findIndex(h => h.dateKey === dateKey);
+  if (idx >= 0) history[idx] = snapshot;
+  else history.unshift(snapshot);
+
+  saveHistory(history);
+  renderHistory();
+  showToast('✅ Snapshot saved for ' + label);
+}
+
+function renderHistory() {
+  const history = getHistory();
+  const container = document.getElementById('historyList');
+
+  if (!history.length) {
+    container.innerHTML = `<div class="history-empty"><div class="ph-icon">📅</div><div class="ph-text">No snapshots yet.<br>Tap "Save Today's Snapshot" each day to track your portfolio history.</div></div>`;
+    return;
+  }
+
+  container.innerHTML = history.map((h, i) => {
+    const plColor = parseFloat(h.pl) >= 0 ? 'var(--green)' : 'var(--red)';
+    const plSign  = parseFloat(h.pl) >= 0 ? '+' : '';
+    return `
+      <div class="history-entry" onclick="toggleHistoryDetail(${i})">
+        <div class="history-entry-header">
+          <span class="history-entry-date">📅 ${h.label}</span>
+          <span class="history-entry-total">RM ${h.total ? h.total.toLocaleString() : '—'}</span>
+        </div>
+        <div class="history-entry-pl" style="color:${plColor};">
+          P/L ${plSign}RM ${Math.abs(h.pl).toLocaleString()} (${plSign}${h.plPct}%) &nbsp;·&nbsp; Saved ${h.time}
+        </div>
+        <div class="history-detail" id="hdetail-${i}">
+          <div class="history-detail-row">
+            <span class="history-detail-label">Spot</span>
+            <span class="history-detail-val">${h.spot ? 'RM ' + h.spot + '/g' : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">UE Sell</span>
+            <span class="history-detail-val">${h.ueSell ? 'RM ' + h.ueSell + '/g' : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">UEP Sell</span>
+            <span class="history-detail-val">${h.uepSell ? 'RM ' + h.uepSell + '/g' : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">Digital UE Value</span>
+            <span class="history-detail-val">${h.ueVal ? 'RM ' + h.ueVal.toLocaleString() : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">Digital UEP Value</span>
+            <span class="history-detail-val">${h.uepVal ? 'RM ' + h.uepVal.toLocaleString() : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">Physical Gold Value</span>
+            <span class="history-detail-val">${h.physVal ? 'RM ' + h.physVal.toLocaleString() : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label">ARBM Value</span>
+            <span class="history-detail-val">${h.arVal ? 'RM ' + h.arVal.toLocaleString() : '—'}</span>
+          </div>
+          <div class="history-detail-row" style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">
+            <span class="history-detail-label" style="font-weight:600;color:var(--text);">Total Value</span>
+            <span class="history-detail-val" style="color:var(--gold);font-weight:700;">RM ${h.total ? h.total.toLocaleString() : '—'}</span>
+          </div>
+          <div class="history-detail-row">
+            <span class="history-detail-label" style="font-weight:600;color:var(--text);">Total P/L</span>
+            <span class="history-detail-val" style="color:${plColor};font-weight:700;">${plSign}RM ${Math.abs(h.pl).toLocaleString()} (${plSign}${h.plPct}%)</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleHistoryDetail(i) {
+  const el = document.getElementById('hdetail-' + i);
+  if (!el) return;
+  el.classList.toggle('open');
+}
+
+function clearHistory() {
+  if (!confirm('Clear all snapshot history? This cannot be undone.')) return;
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+  showToast('History cleared.');
+}
+
+// =================== TOAST ===================
+function showToast(msg, isWarn) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isWarn ? 'var(--red-dim)' : 'var(--green-dim)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 // =================== INIT ===================
 updateCountdown();
-
-// Pre-fill last known rates
-document.getElementById('spotInput').value = '607.47';
-document.getElementById('ueSellInput').value = '661';
-document.getElementById('uepSellInput').value = '648';
+document.getElementById('spotInput').value    = '607.47';
+document.getElementById('ueSellInput').value  = '661';
+document.getElementById('uepSellInput').value = '645';
 updateDashboard();
+renderHistory();
 </script>
 </body>
 </html>
