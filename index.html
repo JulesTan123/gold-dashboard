@@ -955,49 +955,28 @@ async function generateBrief() {
     const spot    = parseFloat(document.getElementById('spotInput').value)    || 0;
     const uepSell = parseFloat(document.getElementById('uepSellInput').value) || 0;
 
-    const prompt = `You are Jules' personal gold investment advisor. Jules holds a Malaysian gold portfolio:
+    const prompt = `You are Jules personal gold investment advisor. Jules holds a Malaysian gold portfolio:
 - Total: 423.96g across KAB Digital UE (165.38g), UEP (86.88g), Physical (71.70g), ARBM pledge (100g)
 - Total invested: RM 273,080
 - KAB UE breakeven: RM 657.53/g | UEP breakeven: RM 631.44/g | Physical BE: RM 671/g | ARBM true BE: RM 715.04/g
 - Current KAB UEP buy price: RM ${uepSell || 'unknown'}/g | Spot: RM ${spot || 'unknown'}/g
 - Strategy: accumulating to 500g+ for 6-figure profit target at $6,000+ gold
-- KAB locks price at purchase time (6am). So if gold is UP overnight: BUY before 9am. If DOWN: wait for lower 9am price.
+- KAB locks price at purchase time (6am). If gold UP overnight: BUY before 9am. If DOWN: wait for lower 9am price.
 
-Search for: live XAU/USD price, overnight movement, USD/MYR rate, any major gold news today.
+Search for: live XAU/USD price, overnight movement, USD/MYR rate, major gold news today.
 
-Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON):
-{
-  "verdict": "BUY NOW" or "WAIT" or "HOLD",
-  "verdictColor": "buy" or "wait" or "hold",
-  "verdictIcon": "🟢" or "🔴" or "🟡",
-  "verdictSub": "One sentence summary of the call",
-  "xauusd": "$X,XXX",
-  "xauusdChange": "+X.X% overnight",
-  "xauusdDir": "up" or "down" or "flat",
-  "usdmyr": "RM X.XX",
-  "usdmyrChange": "Ringgit stronger/weaker",
-  "kabEst": "RM XXX/g",
-  "kabChange": "vs yesterday",
-  "trend": "↑ Rising" or "↓ Falling" or "→ Flat",
-  "trendSub": "X-day streak",
-  "why": [
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 1"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 2"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 3"},
-    {"type": "positive" or "negative" or "neutral", "text": "Bullet point reason 4"}
-  ],
-  "actions": [
-    {"icon": "emoji", "text": "Action step 1"},
-    {"icon": "emoji", "text": "Action step 2"},
-    {"icon": "emoji", "text": "Action step 3"}
-  ],
-  "timestamp": "Generated at X:XX am/pm KL time"
-}`;
+CRITICAL: Respond with ONLY a valid JSON object. No text before or after. No markdown. No code fences. Your entire response must be parseable by JSON.parse().
 
-    const response = await fetch('https://gold-brief-proxy.juliana-tan.workers.dev', {
+Use this exact structure with real current data filled in:
+{"verdict":"BUY NOW","verdictColor":"buy","verdictIcon":"\u{1F7E2}","verdictSub":"One sentence summary","xauusd":"$3100","xauusdChange":"+0.5% overnight","xauusdDir":"up","usdmyr":"RM 4.45","usdmyrChange":"Ringgit weaker","kabEst":"RM 620/g","kabChange":"up vs yesterday","trend":"\u2191 Rising","trendSub":"3-day streak","why":[{"type":"positive","text":"Reason 1"},{"type":"negative","text":"Reason 2"},{"type":"neutral","text":"Reason 3"},{"type":"positive","text":"Reason 4"}],"actions":[{"icon":"\u{1F4B0}","text":"Action 1"},{"icon":"\u{1F4CA}","text":"Action 2"},{"icon":"\u23F0","text":"Action 3"}],"timestamp":"Generated at 8:00 am KL time"}
+
+Rules: verdict = BUY NOW or WAIT or HOLD. verdictColor = buy or wait or hold. xauusdDir = up or down or flat. All text values must be plain ASCII or simple unicode, no special characters that break JSON.`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
@@ -1014,10 +993,37 @@ Respond ONLY in this exact JSON format (no markdown, no explanation outside JSON
 
     const data = await response.json();
     const fullText = data.content.map(i => i.text || '').filter(Boolean).join('');
-    const clean = fullText.replace(/```json|```/g, '').trim();
-    const jsonMatch = clean.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('No JSON in response');
-    const brief = JSON.parse(jsonMatch[0]);
+    // Robust JSON extraction
+    let brief = null;
+    // Try 1: direct parse
+    try { brief = JSON.parse(fullText.trim()); } catch(e) {}
+    // Try 2: strip markdown fences
+    if (!brief) {
+      try {
+        const stripped = fullText.replace(/```json|```/g, '').trim();
+        brief = JSON.parse(stripped);
+      } catch(e) {}
+    }
+    // Try 3: extract first {...} block
+    if (!brief) {
+      const m = fullText.match(/\{[\s\S]*\}/);
+      if (m) {
+        try { brief = JSON.parse(m[0]); } catch(e) {}
+      }
+    }
+    // Try 4: extract and sanitize
+    if (!brief) {
+      const m = fullText.match(/\{[\s\S]*\}/);
+      if (m) {
+        const sanitized = m[0]
+          .replace(/[\u0000-\u001F\u007F]/g, ' ')
+          .replace(/,\s*([}\]])/g, '$1');
+        try { brief = JSON.parse(sanitized); } catch(e) {
+          throw new Error('JSON parse failed: ' + e.message);
+        }
+      }
+    }
+    if (!brief) throw new Error('No valid JSON in response');
     renderBrief(brief);
 
   } catch (err) {
